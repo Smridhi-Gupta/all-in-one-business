@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "School For Training",
+  title: "All In One Business",
   description: "Next.js + Tailwind Project",
 };
 

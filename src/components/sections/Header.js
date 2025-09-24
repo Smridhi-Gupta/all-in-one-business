@@ -7,7 +7,7 @@ const Header = () => {
       <div className="container mx-auto flex items-center justify-between px-6 py-4">
         {/* Logo */}
         <div className="text-2xl font-bold tracking-wide text-white">
-          Trans<span className="text-gray-400">tech</span> Academy
+          All In <span className="text-gray-400">One</span> Business
         </div>
 
         {/* Navigation Links */}
