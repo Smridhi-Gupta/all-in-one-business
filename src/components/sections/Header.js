@@ -11,23 +11,22 @@ const Header = () => {
         </div>
 
         {/* Navigation Links */}
-        <nav className="hidden md:flex gap-6 flex- font-medium">
+        <nav className="hidden md:flex gap-6 flex- font-medium items-center-safe">
           <Link href="/" className="hover:text-white transition-colors">
             HOME
           </Link>
           <Link href="/course" className="hover:text-white transition-colors">
             SERVICES
           </Link>
-         
+          <Link
+            href="/student-portal"
+            className="bg-gray-700 text-white px-4 py-2 rounded-md font-semibold hover:bg-gray-600 transition-colors"
+          >
+            Contact Us
+          </Link>
         </nav>
 
         {/* Student Portal Button */}
-        <Link
-          href="/student-portal"
-          className="ml-6 bg-gray-700 text-white px-4 py-2 rounded-md font-semibold hover:bg-gray-600 transition-colors"
-        >
-          Contact Us
-        </Link>
       </div>
     </header>
   );
