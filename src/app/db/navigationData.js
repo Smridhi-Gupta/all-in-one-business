@@ -5,6 +5,10 @@ export const navigationData = [
     isActive: true,
   },
   {
+    label: "About",
+    href: "/about",
+  },
+  {
     label: "Services",
     href: "/services",
   },
