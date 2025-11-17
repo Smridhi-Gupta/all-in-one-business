@@ -1,22 +1,24 @@
-import CustomerStories from '@/components/home/sections/CustomerStories '
-import Services from '@/components/home/sections/Services'
-import FAQ from '@/components/sections/FAQ'
-import ContactBanner from '@/components/services/sections/ContactBanner'
+import FAQSection from '@/components/home/sections/FAQSection'
+import Disclaimer from '@/components/services/sections/Disclaimer'
 import Hero from '@/components/services/sections/Hero'
-import IndustrySolution from '@/components/services/sections/IndustrySolution'
-import ServicesHighlights from '@/components/services/sections/ServicesHighlights'
+import TakeControl from '@/components/services/sections/TakeControl'
+import WhoWeHelp from '@/components/services/sections/WhoWeHelp'
+import WhyChooseEmbtel from '@/components/services/sections/WhyChooseEmbtel'
+import WhyChooseEmbtel2 from '@/components/services/sections/WhyChooseEmbtel2'
+import WhyThisMatters from '@/components/services/sections/WhyThisMatters'
 import React from 'react'
 
 const page = () => {
   return (
     <div className='mt-15'>
         <Hero />
-        <Services />
-        <ServicesHighlights />
-        <CustomerStories />
-        <IndustrySolution />
-        <ContactBanner />
-        <FAQ />
+        <WhyThisMatters />
+        <WhoWeHelp />
+        <WhyChooseEmbtel />
+        <WhyChooseEmbtel2 />
+        <FAQSection />
+        <TakeControl />
+        <Disclaimer />
     </div>
   )
 }

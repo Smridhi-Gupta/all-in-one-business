@@ -1,96 +1,114 @@
-import Link from "next/link";
+"use client";
+
 import React from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { Facebook, Twitter, Instagram, Linkedin } from "lucide-react";
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-900 text-gray-300 pt-12 pb-6">
+    <footer className="bg-[#031225] text-gray-300 pt-16 pb-6">
       <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-10">
-        {/* Brand / About */}
+        {/* ===== Left Column (Logo + About) ===== */}
         <div>
-          <h2 className="text-2xl font-bold text-white mb-4">
-            All In One Business
-          </h2>
+          <Image
+            src="/Logo.png"
+            alt="Company Logo"
+            width={120}
+            height={120}
+            className="mb-6"
+          />
 
-          <p className="text-gray-400 text-sm mb-4">
-            Empowering students with job-ready IT skills through hands-on
-            training, certifications, and expert guidance.
+          <p className="text-gray-300 text-[14px] leading-relaxed mb-6">
+            Embtel Solutions Ltd. delivers superior web design, development, and
+            digital marketing services tailored to each client’s unique business
+            needs, ensuring long-term success. Customer satisfaction is at the
+            heart of everything we do. We provide specialized support and expert
+            guidance at every stage, helping our clients achieve their goals
+            with confidence and clarity.
           </p>
+
+          {/* ===== Social Icons ===== */}
+          <div className="flex gap-3">
+            <a
+              href="#"
+              className="bg-[#1A1E2E] hover:bg-[#FF5100] p-2.5 rounded-full transition-all"
+            >
+              <Facebook size={18} />
+            </a>
+            <a
+              href="#"
+              className="bg-[#1A1E2E] hover:bg-[#FF5100] p-2.5 rounded-full transition-all"
+            >
+              <Twitter size={18} />
+            </a>
+            <a
+              href="#"
+              className="bg-[#1A1E2E] hover:bg-[#FF5100] p-2.5 rounded-full transition-all"
+            >
+              <Instagram size={18} />
+            </a>
+            <a
+              href="#"
+              className="bg-[#1A1E2E] hover:bg-[#FF5100] p-2.5 rounded-full transition-all"
+            >
+              <Linkedin size={18} />
+            </a>
+          </div>
         </div>
 
-        {/* Quick Links */}
+        {/* ===== Column 2: Services ===== */}
         <div>
-          <h3 className="text-lg font-semibold text-white mb-4">Quick Links</h3>
-          <ul className="space-y-2 text-sm">
-            <li>
-              <Link href="/" className="hover:text-white">
-                Home
-              </Link>
-            </li>
-            <li>
-              <Link href="/about" className="hover:text-white">
-                About Us
-              </Link>
-            </li>
-            <li>
-              <Link href="/services" className="hover:text-white">
-                Services
-              </Link>
-            </li>
-
-            <li>
-              <Link href="/contact" className="hover:text-white">
-                Contact Us
-              </Link>
-            </li>
+          <h3 className="text-white font-semibold text-lg mb-4">Services</h3>
+          <ul className="space-y-2 text-[15px]">
+            <li><Link href="#">Digital Marketing</Link></li>
+            <li><Link href="#">Development</Link></li>
+            <li><Link href="#">PPC</Link></li>
+            <li><Link href="#">DA & AI</Link></li>
+            <li><Link href="#">Security</Link></li>
+            <li><Link href="#">SEO</Link></li>
+            <li><Link href="#">Social Media</Link></li>
+            <li><Link href="#">Web Design</Link></li>
+            <li><Link href="#">Immigration Services</Link></li>
           </ul>
         </div>
 
-        {/* Resources */}
+        {/* ===== Column 3: Service Locations ===== */}
         <div>
-          <h3 className="text-lg font-semibold text-white mb-4">Resources</h3>
-          <ul className="space-y-2 text-sm">
-            <li>
-              <Link href="#" className="hover:text-white">
-                Blog
-              </Link>
-            </li>
-            <li>
-              <Link href="#" className="hover:text-white">
-                FAQs
-              </Link>
-            </li>
-            <li>
-              <Link href="#" className="hover:text-white">
-                Privacy Policy
-              </Link>
-            </li>
-            <li>
-              <Link href="#" className="hover:text-white">
-                Terms & Conditions
-              </Link>
-            </li>
+          <h3 className="text-white font-semibold text-lg mb-4">
+            Service Locations
+          </h3>
+          <ul className="space-y-2 text-[15px]">
+            <li>Fremont</li>
+            <li>San Jose</li>
+            <li>Oakland</li>
+            <li>San Mateo</li>
+            <li>San Francisco</li>
+            <li>Palo Alto</li>
           </ul>
         </div>
 
-        {/* Newsletter */}
-        <div className="flex flex-col gap-3">
-          <p className="text-gray-400 text-sm">
-            <span className="font-semibold text-white">Address:</span>
-            <br />
-            39159 Paseo Padre Pkwy #105, <br />
-            Fremont, CA 94538
-          </p>
-          <p className="text-gray-400 text-sm">
-            <span className="font-semibold text-white">Email:</span>
-            <br />
-            test@yopmail.com
-          </p>
+        {/* ===== Column 4: Company ===== */}
+        <div>
+          <h3 className="text-white font-semibold text-lg mb-4">Company</h3>
+          <ul className="space-y-2 text-[15px]">
+            <li><Link href="#">About Us</Link></li>
+            <li><Link href="#">Industries</Link></li>
+            <li><Link href="#">Services</Link></li>
+            <li><Link href="#">Security</Link></li>
+            <li><Link href="#">Blog</Link></li>
+            <li><Link href="#">Contact Us</Link></li>
+          </ul>
         </div>
       </div>
 
-      {/* Bottom Bar */}
-      <div className="border-t border-gray-700 mt-10 pt-6 text-center text-sm text-gray-500">
-        © {new Date().getFullYear()} TransTech Academy. All rights reserved.
+      {/* ===== Bottom Bar ===== */}
+      <div className="border-t border-white/10 mt-10 pt-5 text-center text-sm text-gray-400">
+        Copyright © {new Date().getFullYear()} Embtel Solutions - All Rights
+        Reserved. Designed by{" "}
+        <span className="text-[#FF5100] font-semibold cursor-pointer hover:underline">
+          Embtel Solutions, Inc.
+        </span>
       </div>
     </footer>
   );

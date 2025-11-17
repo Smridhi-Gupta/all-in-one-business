@@ -1,123 +1,155 @@
 "use client";
 
+import React from "react";
+import Image from "next/image";
 import { motion } from "framer-motion";
-import { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
 
-const tabs = [
-  "IT",
-  "Risk and Security",
-  "Human Resources",
-  "CRM",
-  "App Development",
-  "Finance and Supply Chain",
-];
-
-export default function Services() {
-  const [activeTab, setActiveTab] = useState("IT");
+const Services = () => {
+  const services = [
+    {
+      title: "Social Media Marketing",
+      desc: "Leverage the power of popular social media platforms to enhance brand visibility and engagement.",
+    },
+    {
+      title: "Search Engine Optimization",
+      desc: "Enhance your online visibility with our expert Search Engine Optimization (SEO) services.",
+      dark: true,
+    },
+    {
+      title: "PPC Advertising",
+      desc: "Implement highly targeted advertising campaigns to reach your audience at the right moment.",
+    },
+    {
+      title: "Content Marketing",
+      desc: "Develop and distribute valuable, relevant, and consistent content to attract and engage your target audience.",
+    },
+    {
+      title: "Email Marketing",
+      desc: "Cultivate direct communication with your audience through personalized and targeted email campaigns.",
+    },
+    {
+      title: "Technology Integration",
+      desc: "Seamlessly integrate cutting-edge technology solutions into your business operations.",
+    },
+  ];
 
   return (
-    <section className="relative w-full text-black py-10 px-6 lg:px-20 bg-white overflow-hidden">
-      {/* Tabs */}
-      <div className="flex flex-wrap justify-center gap-3 mb-16">
-        <div className="flex flex-wrap justify-center gap-7 mb-16 rounded-full bg-gray-100 p-4 w-full max-w-6xl mx-auto">
-          {tabs.map((tab) => (
-            <button
-              key={tab}
-              onClick={() => setActiveTab(tab)}
-              className={`px-6 py-2 rounded-full font-medium transition shadow-sm ${
-                activeTab === tab
-                  ? "bg-[#FF5100] text-white"
-                  : "bg-gray-200 text-gray-700 hover:bg-[#FF5100] hover:text-white"
-              }`}
-            >
-              {tab}
-            </button>
-          ))}
+    <section className="relative w-full bg-white overflow-hidden py-20">
+      {/* ===== Trusted by Brands Section ===== */}
+      <div className="flex flex-col items-center mb-20">
+        <p className="text-base font-bold text-gray-700 mb-6">
+          Trusted by brands who value results
+        </p>
+
+        {/* Outer Wrapper for Overlapping Bars */}
+        <div className="relative">
+          {/* Main Navy Bar */}
+          <div className="bg-[#0B1221] flex items-center justify-center gap-12 px-10 py-6 rounded-2xl shadow-lg relative z-10">
+            {[1, 2, 3, 4].map((_, i) => (
+              <Image
+                key={i}
+                src="/logoipsum.png"
+                alt="brand logo"
+                width={120}
+                height={30}
+                className="object-contain opacity-90"
+              />
+            ))}
+          </div>
+
+          {/* Orange Underbar (Overlapping) */}
+          <div className="absolute bottom-[-8px] left-1/2 -translate-x-1/2 w-[92%] h-[14px] bg-[#FF5100] rounded-2xl z-0"></div>
         </div>
       </div>
 
-      {/* Main Content - 3 sections */}
-      <div className="grid lg:grid-cols-3 gap-12 max-w-7xl mx-auto items-center mt-[-70px]">
-        {/* Left: Heading + Subheading */}
-        <div className="flex flex-col gap-6">
-          <h2 className="text-4xl lg:text-5xl font-bold leading-tight">
-            Run your enterprise IT on the{" "}
-            <span className="text-[#FF5100]">ServiceNow AI Platform</span>
-          </h2>
-          <p className="text-gray-600 text-lg">
-            Bring your AI, data, and workflows together with automation for more
-            efficient core IT functions.
-          </p>
-          <Button
-            size="lg"
-            className="bg-[#FF5100] hover:bg-[#dc4804] text-white font-semibold rounded-lg shadow-md"
-          >
-            Explore IT Solutions
-          </Button>
+      {/* ===== Infinity Background ===== */}
+      <div className="absolute inset-0 flex justify-center items-center">
+        <Image
+          src="/infinity.png"
+          alt="infinity background"
+          width={950}
+          height={950}
+          className="object-cover opacity-100 saturate-150"
+        />
+      </div>
+
+      {/* ===== Section Header ===== */}
+      <div className="relative z-10 max-w-6xl mx-auto px-6">
+        <span className="inline-flex items-center bg-[#FF5100]/10 border border-[#FF5100]/30 text-[#FF5100] text-xs font-medium px-3 py-1 rounded-full mb-4">
+          ● Services
+        </span>
+
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between mb-14">
+          <div>
+            <h2 className="text-3xl md:text-4xl font-semibold text-[#031225] mb-3">
+              Comprehensive Digital <br /> Marketing Services
+            </h2>
+          </div>
+          <div className="mt-4 md:mt-0 max-w-md text-gray-600 text-sm leading-relaxed">
+            Tailored Solutions for Your Business Growth. Discover expert digital
+            marketing solutions designed for performance and impact.
+            <br />
+            <button className="mt-3 px-5 py-2 bg-[#FF5100] text-white rounded-full text-sm font-medium hover:bg-orange-500 transition-all">
+              Explore more
+            </button>
+          </div>
         </div>
+      </div>
 
-        {/* Center: Floating Card */}
+      {/* ===== Service Cards Grid (with stagger effect) ===== */}
+      <div className="relative z-10 max-w-6xl mx-auto px-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 place-items-center">
+        {services.map((service, index) => {
+          // Determine card position (1, 2, 3 repeating pattern)
+          const position = (index % 3) + 1; // 1 → left, 2 → center, 3 → right
 
+          // Position logic for stagger effect
+          let marginClass = "";
+          if (position === 2) marginClass = "mt-8"; // middle card slightly down
+          else marginClass = "-mt-6"; // left/right cards slightly up
 
-        {/* Right: Solutions List centered vertically */}
-        <div className="flex flex-col gap-4 justify-center">
-          <ul className="space-y-3 text-lg">
-            {[
-              "IT Service Management",
-              "IT Operations Management",
-              "IT Asset Management",
-              "Strategic Portfolio Management",
-            ].map((item, index) => (
-              <li
-                key={index}
-                className="flex items-center gap-2 border-l-4 border-[#FF5100] pl-4 shadow-md p-3 rounded-md"
-              >
-                <span className="text-[#FF5100]">→</span>
-                {item}
-              </li>
-            ))}
-          </ul>
-        </div>
+          return (
+            <motion.div
+              key={index}
+              whileHover={{ y: -8, scale: 1.02 }}
+              transition={{ duration: 0.3 }}
+              className={`relative w-full h-[330px] rounded-2xl ${
+                service.dark
+                  ? "bg-[#031225] text-white"
+                  : "bg-white text-[#031225]"
+              } shadow-[0_8px_25px_rgba(0,0,0,0.15)] p-6 flex flex-col justify-between transition-all ${marginClass}`}
+            >
+              <div>
+                <h3 className="text-2xl font-bold mb-2">{service.title}</h3>
+                <p
+                  className={`text-sm ${
+                    service.dark ? "text-gray-300" : "text-gray-600"
+                  } mb-6`}
+                >
+                  {service.desc}
+                </p>
 
-                <div className="relative flex justify-center items-center">
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="w-full max-w-md"
-          >
-            <Card className="rounded-2xl shadow-2xl overflow-hidden border border-gray-200 bg-[#f9fafb]">
-              <CardContent className="p-6">
-                <h3 className="text-xl font-semibold text-[#FF5100] mb-4">
-                  Incident summarized by AI agents
-                </h3>
-                <div className="space-y-4 text-gray-700">
-                  <div className="border-l-4 border-[#FF5100] pl-4 shadow-md p-3 rounded-md">
-                    <h4 className="font-medium text-black">Issue</h4>
-                    <p className="text-gray-600 text-sm mt-1">
-                      Employee is facing an issue with the Rewards Processing
-                      application.
-                    </p>
-                  </div>
-                  <div className="border-l-4 border-[#00FFFF] pl-4 shadow-md p-3 rounded-md">
-                    <h4 className="font-medium text-black">Actions Taken</h4>
-                    <ul className="mt-2 space-y-2">
-                      <li className="bg-[#FF5100]/10 p-2 rounded-md text-sm border border-[#FF5100]/30 shadow">
-                        <strong>Issue escalated:</strong> Sent to IT for review.
-                      </li>
-                      <li className="bg-[#00FFFF]/10 p-2 rounded-md text-sm border border-[#00FFFF]/30 shadow">
-                        <strong>Restart application:</strong> Suggested restart.
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          </motion.div>
-        </div>
+                {/* Learn More Button */}
+                <button className="inline-flex items-center gap-2 bg-[#FF5100] text-white px-4 py-2 rounded-full text-xs font-medium hover:bg-orange-500 transition-all">
+                  Learn more <span className="text-base font-bold">»</span>
+                </button>
+              </div>
+
+              {/* Card Image */}
+              <div className="mt-6 flex justify-center">
+                <Image
+                  src="/serviceCard3.png"
+                  alt={service.title}
+                  width={160}
+                  height={90}
+                  className="object-contain"
+                />
+              </div>
+            </motion.div>
+          );
+        })}
       </div>
     </section>
   );
-}
+};
+
+export default Services;
