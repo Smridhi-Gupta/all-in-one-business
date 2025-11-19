@@ -10,7 +10,7 @@ export const navigationData = [
   },
   {
     label: "Services",
-    href: "/services",
+    // href: "/service",  
   },
 
   {
