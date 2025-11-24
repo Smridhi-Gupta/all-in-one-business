@@ -38,23 +38,25 @@ const Header = () => {
             {/* MEGA MENU */}
             <div
               className="
-                hidden group-hover:block
-                fixed left-0 top-[82px] w-full bg-white z-40
-                py-12 border-t border-gray-200
-              "
+      hidden group-hover:block
+      absolute left-1/2 -translate-x-1/2 top-full
+      w-screen bg-white z-40
+      py-12 border-t border-gray-200
+    "
             >
               <div className="mx-auto max-w-[1180px] grid grid-cols-3 gap-20 px-10">
                 {/* COLUMN 1 */}
                 <div className="space-y-10">
                   {/* DIGITAL MARKETING */}
-                  <h4
-                    className="text-[17px] font-bold tracking-[0.3px] flex items-center
-                      before:content-['•'] before:text-[#FF5100] before:mr-2
-                      hover:text-[#FF5100] cursor-pointer
-                    "
-                  >
-                    DIGITAL MARKETING
-                  </h4>
+                  <Link href="/services">
+                    <h4
+                      className="text-[17px] font-bold tracking-[0.3px] flex items-center
+            before:content-['•'] before:text-[#FF5100] before:mr-2
+            hover:text-[#FF5100] cursor-pointer"
+                    >
+                      DIGITAL MARKETING
+                    </h4>
+                  </Link>
 
                   <ul className="text-[15px] text-[#494949] leading-[28px]">
                     {[
@@ -64,7 +66,7 @@ const Header = () => {
                     ].map((item, i) => (
                       <li key={i}>
                         <Link
-                          href="/services"
+                          href="/subservices"
                           className="hover:text-[#FF5100] transition"
                         >
                           {item}
@@ -74,14 +76,15 @@ const Header = () => {
                   </ul>
 
                   {/* WEB DESIGN */}
-                  <h4
-                    className="text-[17px] font-bold flex items-center
-                      before:content-['•'] before:text-[#FF5100] before:mr-2
-                      hover:text-[#FF5100] cursor-pointer
-                    "
-                  >
-                    WEB DESIGN
-                  </h4>
+                  <Link href="/services">
+                    <h4
+                      className="text-[17px] font-bold flex items-center
+            before:content-['•'] before:text-[#FF5100] before:mr-2
+            hover:text-[#FF5100] cursor-pointer"
+                    >
+                      WEB DESIGN
+                    </h4>
+                  </Link>
 
                   <ul className="text-[15px] text-[#494949] leading-[28px]">
                     {[
@@ -91,7 +94,7 @@ const Header = () => {
                     ].map((item, i) => (
                       <li key={i}>
                         <Link
-                          href="/services"
+                          href="/subservices"
                           className="hover:text-[#FF5100] transition"
                         >
                           {item}
@@ -101,14 +104,15 @@ const Header = () => {
                   </ul>
 
                   {/* SOCIAL MEDIA */}
-                  <h4
-                    className="text-[17px] font-bold flex items-center
-                      before:content-['•'] before:text-[#FF5100] before:mr-2
-                      hover:text-[#FF5100] cursor-pointer
-                    "
-                  >
-                    SOCIAL MEDIA
-                  </h4>
+                  <Link href="/services">
+                    <h4
+                      className="text-[17px] font-bold flex items-center
+            before:content-['•'] before:text-[#FF5100] before:mr-2
+            hover:text-[#FF5100] cursor-pointer"
+                    >
+                      SOCIAL MEDIA
+                    </h4>
+                  </Link>
 
                   <ul className="text-[15px] text-[#494949] leading-[28px]">
                     {[
@@ -118,7 +122,7 @@ const Header = () => {
                     ].map((item, i) => (
                       <li key={i}>
                         <Link
-                          href="/services"
+                          href="/subservices"
                           className="hover:text-[#FF5100] transition"
                         >
                           {item}
@@ -131,14 +135,15 @@ const Header = () => {
                 {/* COLUMN 2 */}
                 <div className="space-y-10">
                   {/* SEO */}
-                  <h4
-                    className="text-[17px] font-bold flex items-center
-                      before:content-['•'] before:text-[#FF5100] before:mr-2
-                      hover:text-[#FF5100] cursor-pointer
-                    "
-                  >
-                    SEO
-                  </h4>
+                  <Link href="/services">
+                    <h4
+                      className="text-[17px] font-bold flex items-center
+            before:content-['•'] before:text-[#FF5100] before:mr-2
+            hover:text-[#FF5100] cursor-pointer"
+                    >
+                      SEO
+                    </h4>
+                  </Link>
 
                   <ul className="text-[15px] text-[#494949] leading-[28px]">
                     {[
@@ -151,7 +156,7 @@ const Header = () => {
                     ].map((item, i) => (
                       <li key={i}>
                         <Link
-                          href="/services"
+                          href="/subservices"
                           className="hover:text-[#FF5100] transition"
                         >
                           {item}
@@ -161,14 +166,15 @@ const Header = () => {
                   </ul>
 
                   {/* PPC */}
-                  <h4
-                    className="text-[17px] font-bold flex items-center
-                      before:content-['•'] before:text-[#FF5100] before:mr-2
-                      hover:text-[#FF5100] cursor-pointer
-                    "
-                  >
-                    PPC
-                  </h4>
+                  <Link href="/services">
+                    <h4
+                      className="text-[17px] font-bold flex items-center
+            before:content-['•'] before:text-[#FF5100] before:mr-2
+            hover:text-[#FF5100] cursor-pointer"
+                    >
+                      PPC
+                    </h4>
+                  </Link>
 
                   <ul className="text-[15px] text-[#494949] leading-[28px]">
                     {[
@@ -178,7 +184,7 @@ const Header = () => {
                     ].map((item, i) => (
                       <li key={i}>
                         <Link
-                          href="/services"
+                          href="/subservices"
                           className="hover:text-[#FF5100] transition"
                         >
                           {item}
@@ -191,20 +197,21 @@ const Header = () => {
                 {/* COLUMN 3 */}
                 <div className="space-y-10">
                   {/* DA & AI */}
-                  <h4
-                    className="text-[17px] font-bold flex items-center
-                      before:content-['•'] before:text-[#FF5100] before:mr-2
-                      hover:text-[#FF5100] cursor-pointer
-                    "
-                  >
-                    DA & AI
-                  </h4>
+                  <Link href="/services">
+                    <h4
+                      className="text-[17px] font-bold flex items-center
+            before:content-['•'] before:text-[#FF5100] before:mr-2
+            hover:text-[#FF5100] cursor-pointer"
+                    >
+                      DA & AI
+                    </h4>
+                  </Link>
 
                   <ul className="text-[15px] text-[#494949] leading-[28px]">
                     {["CRM", "Web Scrapping", "Chatbot"].map((item, i) => (
                       <li key={i}>
                         <Link
-                          href="/services"
+                          href="/subservices"
                           className="hover:text-[#FF5100] transition"
                         >
                           {item}
@@ -214,14 +221,15 @@ const Header = () => {
                   </ul>
 
                   {/* DEVELOPMENT */}
-                  <h4
-                    className="text-[17px] font-bold flex items-center
-                      before:content-['•'] before:text-[#FF5100] before:mr-2
-                      hover:text-[#FF5100] cursor-pointer
-                    "
-                  >
-                    DEVELOPMENT
-                  </h4>
+                  <Link href="/services">
+                    <h4
+                      className="text-[17px] font-bold flex items-center
+            before:content-['•'] before:text-[#FF5100] before:mr-2
+            hover:text-[#FF5100] cursor-pointer"
+                    >
+                      DEVELOPMENT
+                    </h4>
+                  </Link>
 
                   <ul className="text-[15px] text-[#494949] leading-[28px]">
                     {[
@@ -232,7 +240,7 @@ const Header = () => {
                     ].map((item, i) => (
                       <li key={i}>
                         <Link
-                          href="/services"
+                          href="/subservices"
                           className="hover:text-[#FF5100] transition"
                         >
                           {item}
@@ -241,25 +249,27 @@ const Header = () => {
                     ))}
                   </ul>
 
-                  {/* GRAPHIC */}
-                  <h4
-                    className="text-[17px] font-bold flex items-center
-                      before:content-['•'] before:text-[#FF5100] before:mr-2
-                      hover:text-[#FF5100] cursor-pointer
-                    "
-                  >
-                    GRAPHIC DESIGN
-                  </h4>
+                  {/* GRAPHIC DESIGN */}
+                  <Link href="/services">
+                    <h4
+                      className="text-[17px] font-bold flex items-center
+            before:content-['•'] before:text-[#FF5100] before:mr-2
+            hover:text-[#FF5100] cursor-pointer"
+                    >
+                      GRAPHIC DESIGN
+                    </h4>
+                  </Link>
 
                   {/* IMMIGRATION */}
-                  <h4
-                    className="text-[17px] font-bold flex items-center
-                      before:content-['•'] before:text-[#FF5100] before:mr-2
-                      hover:text-[#FF5100] cursor-pointer
-                    "
-                  >
-                    IMMIGRATION SERVICES
-                  </h4>
+                  <Link href="/services">
+                    <h4
+                      className="text-[17px] font-bold flex items-center
+            before:content-['•'] before:text-[#FF5100] before:mr-2
+            hover:text-[#FF5100] cursor-pointer"
+                    >
+                      IMMIGRATION SERVICES
+                    </h4>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -328,25 +338,6 @@ const Header = () => {
           >
             Login
           </Link>
-
-          {/* USER DROPDOWN */}
-          <div className="relative group">
-            <User className="cursor-pointer hover:text-[#FF5100]" />
-
-            <div className="hidden group-hover:block absolute top-8 right-0 w-[180px] bg-white shadow-xl border border-gray-200 rounded-md">
-              <ul className="text-sm">
-                <li className="px-4 py-2 hover:bg-gray-100 hover:text-[#FF5100] cursor-pointer">
-                  My Profile
-                </li>
-                <li className="px-4 py-2 hover:bg-gray-100 hover:text-[#FF5100] cursor-pointer">
-                  Settings
-                </li>
-                <li className="px-4 py-2 hover:bg-gray-100 hover:text-[#FF5100] cursor-pointer">
-                  Logout
-                </li>
-              </ul>
-            </div>
-          </div>
         </div>
       </div>
     </header>

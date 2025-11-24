@@ -15,7 +15,7 @@ const Hero = () => {
 
   return (
     <motion.section
-      className="bg-[#021024] text-white py-16 px-6 overflow-hidden"
+      className="bg-[#021024] text-white py-40 px-6 overflow-hidden"
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.3 }}

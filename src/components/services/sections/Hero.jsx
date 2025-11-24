@@ -20,7 +20,7 @@ const Hero = () => {
 
   return (
     <motion.section
-      className="bg-[#021024] text-white py-16 px-6 overflow-hidden"
+      className="bg-[#021024] text-white py-20 px-6 overflow-hidden"
       variants={pageTransition}
       initial="initial"
       animate="animate"
