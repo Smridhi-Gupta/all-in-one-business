@@ -1,10 +1,10 @@
-import Login from '@/components/user-dashboard/Login'
+import Sidebar from '@/components/user-dashboard/Sidebar'
 import React from 'react'
 
 const page = () => {
   return (
     <div>
-        <Login />
+        <Sidebar />
     </div>
   )
 }

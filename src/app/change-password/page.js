@@ -1,10 +1,10 @@
-import Login from '@/components/user-dashboard/Login'
+import ChangePassword from '@/components/user-dashboard/ChangePassword'
 import React from 'react'
 
 const page = () => {
   return (
     <div>
-        <Login />
+      <ChangePassword />
     </div>
   )
 }
