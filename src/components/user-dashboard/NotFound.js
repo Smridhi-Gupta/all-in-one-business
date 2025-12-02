@@ -6,24 +6,15 @@ import notFound from "@/Assets/Images/404notFound2.png";
 
 export default function NotFound() {
   return (
-    <div
-      style={{
-        display: "flex",
-        height: "100vh",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <Image
-        src={notFound}
-        alt="404 Not Found"
-        style={{
-          maxWidth: "567px",
-          margin: "0 auto",
-          display: "block",
-        }}
-        className="not-found-child"
-      />
+    <div className="flex min-h-screen items-center justify-center bg-gray-50 p-4">
+      <div className="max-w-[567px] w-full">
+        <Image
+          src={notFound}
+          alt="404 Not Found"
+          className="mx-auto w-full h-auto object-contain"
+          priority
+        />
+      </div>
     </div>
   );
 }

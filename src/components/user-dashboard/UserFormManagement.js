@@ -1,17 +1,12 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Table from "react-bootstrap/Table";
-import Pagination from "react-bootstrap/Pagination";
 import axios from "axios";
 import { toast } from "react-toastify";
 import moment from "moment";
-import { Button, Modal } from "react-bootstrap";
-
-import Header from "@/components/Header";
-import Sidebar from "@/components/Sidebar";
 
 import { BASE_URL_USER } from "@/API";
+import Sidebar from "./Sidebar";
 
 export default function UserFormManagement() {
   const ITEMS_PER_PAGE = 5;
@@ -19,7 +14,6 @@ export default function UserFormManagement() {
   const [forms, setForms] = useState([]);
   const [filteredList, setFilteredList] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
-  const [isLoading] = useState(false);
 
   const [selectedForm, setSelectedForm] = useState(null);
   const [showViewModal, setShowViewModal] = useState(false);
@@ -40,7 +34,7 @@ export default function UserFormManagement() {
   // 🔹 Search filtering
   useEffect(() => {
     filterList(searchQuery);
-  }, [searchQuery]);
+  }, [searchQuery, forms, currentPage]);
 
   const getUserForms = async () => {
     try {
@@ -61,7 +55,6 @@ export default function UserFormManagement() {
         toast.error("No forms found");
       }
     } catch (error) {
-      console.error("Error fetching forms:", error);
       toast.error("Failed to fetch user forms");
     }
   };
@@ -86,186 +79,206 @@ export default function UserFormManagement() {
 
   return (
     <>
-      <div className="container-fluid">
-        <Header />
+      <div className="min-h-screen bg-gray-100 flex">
+        <Sidebar />
 
-        <div className="row">
-          <Sidebar />
+        <div className="flex-1 p-8 ml-16">
 
-          <div className="col-9 main-dash-left">
-            <section className="back-dashboard-sec comn-dashboard-page">
-              <div className="main-notification-messege">
-                <div className="notifi-list d-flex justify-content-between align-items-center">
-                  <h6>Services</h6>
-                  <input
-                    type="text"
-                    placeholder="Search by name or email"
-                    className="form-control w-25"
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                  />
-                </div>
+          <div className="bg-white rounded-xl shadow p-6 mt-6">
+            {/* Header */}
+            <div className="flex items-center justify-between mb-4">
+              <h6 className="text-lg font-semibold">Services</h6>
+              <input
+                type="text"
+                placeholder="Search by name or email"
+                className="border rounded-md px-4 py-2 w-64 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+              />
+            </div>
 
-                <div className="notification-table pt-0">
-                  <Table>
-                    <thead>
-                      <tr className="head-class-td">
-                        <th>Sr. No.</th>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Contact</th>
-                        <th>Service</th>
-                        <th>Date</th>
-                        <th>Action</th>
-                      </tr>
-                    </thead>
+            {/* Table */}
+            <div className="overflow-x-auto">
+              <table className="w-full border border-gray-200 rounded-lg overflow-hidden">
+                <thead className="bg-gray-100">
+                  <tr className="text-left text-sm text-gray-600">
+                    <th className="px-4 py-3">Sr. No.</th>
+                    <th className="px-4 py-3">Name</th>
+                    <th className="px-4 py-3">Email</th>
+                    <th className="px-4 py-3">Contact</th>
+                    <th className="px-4 py-3">Service</th>
+                    <th className="px-4 py-3">Date</th>
+                    <th className="px-4 py-3">Action</th>
+                  </tr>
+                </thead>
 
-                    <tbody>
-                      {filteredList?.length > 0 ? (
-                        filteredList.map((form, index) => (
-                          <tr key={form._id}>
-                            <td>
-                              {(currentPage - 1) * ITEMS_PER_PAGE + index + 1}
-                            </td>
-                            <td>{form?.name}</td>
-                            <td>{form?.email}</td>
-                            <td>{form?.contact}</td>
+                <tbody className="divide-y">
+                  {filteredList?.length > 0 ? (
+                    filteredList.map((form, index) => (
+                      <tr key={form._id} className="hover:bg-gray-50">
+                        <td className="px-4 py-3 text-sm">
+                          {(currentPage - 1) * ITEMS_PER_PAGE + index + 1}
+                        </td>
+                        <td className="px-4 py-3 text-sm">{form?.name}</td>
+                        <td className="px-4 py-3 text-sm">{form?.email}</td>
+                        <td className="px-4 py-3 text-sm">{form?.contact}</td>
 
-                            <td>
-                              {form.role === "AGENCY"
-                                ? form?.serviceProvided
-                                : form?.serviceRequired?.name}
-                            </td>
+                        <td className="px-4 py-3 text-sm">
+                          {form.role === "AGENCY"
+                            ? form?.serviceProvided
+                            : form?.serviceRequired?.name}
+                        </td>
 
-                            <td>{formattedDate(form?.createdAt)}</td>
+                        <td className="px-4 py-3 text-sm">
+                          {formattedDate(form?.createdAt)}
+                        </td>
 
-                            <td>
-                              <span
-                                className="text-primary cursor-pointer"
-                                style={{ cursor: "pointer" }}
-                                onClick={() => {
-                                  setShowViewModal(true);
-                                  setSelectedForm(form);
-                                }}
-                              >
-                                View
-                              </span>
-                            </td>
-                          </tr>
-                        ))
-                      ) : (
-                        <tr>
-                          <td colSpan={7} className="text-center">
-                            No forms found
-                          </td>
-                        </tr>
-                      )}
-                    </tbody>
-                  </Table>
-
-                  {/* Pagination */}
-                  {filteredList?.length > 0 && (
-                    <div className="cstm_pagination text-center">
-                      <Pagination>
-                        <Pagination.First
-                          onClick={() => setCurrentPage(1)}
-                          disabled={currentPage === 1}
-                        />
-                        <Pagination.Prev
-                          onClick={() =>
-                            setCurrentPage(Math.max(currentPage - 1, 1))
-                          }
-                          disabled={currentPage === 1}
-                        />
-                        {Array.from({ length: totalPages }).map((_, index) => (
-                          <Pagination.Item
-                            key={index + 1}
-                            active={index + 1 === currentPage}
-                            onClick={() => setCurrentPage(index + 1)}
+                        <td className="px-4 py-3 text-sm">
+                          <span
+                            className="text-blue-600 cursor-pointer hover:underline"
+                            onClick={() => {
+                              setShowViewModal(true);
+                              setSelectedForm(form);
+                            }}
                           >
-                            {index + 1}
-                          </Pagination.Item>
-                        ))}
-                        <Pagination.Next
-                          onClick={() =>
-                            setCurrentPage(
-                              Math.min(currentPage + 1, totalPages)
-                            )
-                          }
-                          disabled={currentPage === totalPages}
-                        />
-                        <Pagination.Last
-                          onClick={() => setCurrentPage(totalPages)}
-                          disabled={currentPage === totalPages}
-                        />
-                      </Pagination>
-                    </div>
+                            View
+                          </span>
+                        </td>
+                      </tr>
+                    ))
+                  ) : (
+                    <tr>
+                      <td
+                        colSpan={7}
+                        className="text-center py-6 text-gray-500"
+                      >
+                        No forms found
+                      </td>
+                    </tr>
                   )}
-                </div>
+                </tbody>
+              </table>
+            </div>
+
+            {/* Pagination */}
+            {filteredList?.length > 0 && (
+              <div className="flex justify-center items-center gap-2 mt-6">
+                <button
+                  onClick={() => setCurrentPage(1)}
+                  disabled={currentPage === 1}
+                  className="px-3 py-1 border rounded disabled:opacity-50"
+                >
+                  First
+                </button>
+
+                <button
+                  onClick={() => setCurrentPage(Math.max(currentPage - 1, 1))}
+                  disabled={currentPage === 1}
+                  className="px-3 py-1 border rounded disabled:opacity-50"
+                >
+                  Prev
+                </button>
+
+                {Array.from({ length: totalPages }).map((_, index) => (
+                  <button
+                    key={index + 1}
+                    onClick={() => setCurrentPage(index + 1)}
+                    className={`px-3 py-1 border rounded ${
+                      currentPage === index + 1
+                        ? "bg-blue-600 text-white"
+                        : "hover:bg-gray-100"
+                    }`}
+                  >
+                    {index + 1}
+                  </button>
+                ))}
+
+                <button
+                  onClick={() =>
+                    setCurrentPage(Math.min(currentPage + 1, totalPages))
+                  }
+                  disabled={currentPage === totalPages}
+                  className="px-3 py-1 border rounded disabled:opacity-50"
+                >
+                  Next
+                </button>
+
+                <button
+                  onClick={() => setCurrentPage(totalPages)}
+                  disabled={currentPage === totalPages}
+                  className="px-3 py-1 border rounded disabled:opacity-50"
+                >
+                  Last
+                </button>
               </div>
-            </section>
+            )}
           </div>
         </div>
       </div>
 
       {/* View Modal */}
-      <Modal
-        show={showViewModal}
-        onHide={() => setShowViewModal(false)}
-        centered
-        size="lg"
-        className="comm_modal cst_inner_wid_modal"
-      >
-        <Modal.Header closeButton>
-          <Modal.Title className="fs-1">Form Details</Modal.Title>
-        </Modal.Header>
-
-        <Modal.Body>
-          {selectedForm ? (
-            <div className="p-3 fs-4">
-              <p>
-                <strong>Name:</strong> {selectedForm?.name}
-              </p>
-              <p>
-                <strong>Email:</strong> {selectedForm?.email}
-              </p>
-              <p>
-                <strong>Contact:</strong> {selectedForm?.contact}
-              </p>
-              <p>
-                <strong>Company Name:</strong>{" "}
-                {selectedForm?.companyName || "—"}
-              </p>
-              <p>
-                <strong>Website:</strong> {selectedForm?.website || "—"}
-              </p>
-              <p>
-                <strong>Service Required:</strong>{" "}
-                {selectedForm?.serviceRequired?.name || "—"}
-              </p>
-              <p>
-                <strong>Message:</strong>{" "}
-                {selectedForm?.message || "No message provided"}
-              </p>
-              <p>
-                <strong>Role:</strong> {selectedForm?.role}
-              </p>
-              <p>
-                <strong>Submitted On:</strong>{" "}
-                {formattedDate(selectedForm?.createdAt)}
-              </p>
+      {showViewModal && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-xl shadow-lg w-full max-w-2xl p-6">
+            <div className="flex justify-between items-center mb-4">
+              <h2 className="text-xl font-semibold">Form Details</h2>
+              <button
+                onClick={() => setShowViewModal(false)}
+                className="text-gray-500 hover:text-gray-800"
+              >
+                ✕
+              </button>
             </div>
-          ) : (
-            <p>No data found</p>
-          )}
-        </Modal.Body>
 
-        <Modal.Footer>
-          <Button variant="secondary" onClick={() => setShowViewModal(false)}>
-            Close
-          </Button>
-        </Modal.Footer>
-      </Modal>
+            {selectedForm ? (
+              <div className="space-y-2 text-sm">
+                <p>
+                  <strong>Name:</strong> {selectedForm?.name}
+                </p>
+                <p>
+                  <strong>Email:</strong> {selectedForm?.email}
+                </p>
+                <p>
+                  <strong>Contact:</strong> {selectedForm?.contact}
+                </p>
+                <p>
+                  <strong>Company Name:</strong>{" "}
+                  {selectedForm?.companyName || "—"}
+                </p>
+                <p>
+                  <strong>Website:</strong> {selectedForm?.website || "—"}
+                </p>
+                <p>
+                  <strong>Service Required:</strong>{" "}
+                  {selectedForm?.serviceRequired?.name || "—"}
+                </p>
+                <p>
+                  <strong>Message:</strong>{" "}
+                  {selectedForm?.message || "No message provided"}
+                </p>
+                <p>
+                  <strong>Role:</strong> {selectedForm?.role}
+                </p>
+                <p>
+                  <strong>Submitted On:</strong>{" "}
+                  {formattedDate(selectedForm?.createdAt)}
+                </p>
+              </div>
+            ) : (
+              <p>No data found</p>
+            )}
+
+            <div className="mt-6 text-right">
+              <button
+                onClick={() => setShowViewModal(false)}
+                className="px-4 py-2 border rounded hover:bg-gray-100"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 }

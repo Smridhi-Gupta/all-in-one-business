@@ -40,18 +40,21 @@ export default function Signup() {
     setErrorMessage("");
 
     try {
-      const response = await axios.post(BASE_URL_USER + SIGNUP, data);
+      const apiURL = BASE_URL_USER + SIGNUP;
+      console.log("SIGNUP API HITTING:", apiURL); // ⭐ debug line
+
+      const response = await axios.post(apiURL, data);
 
       if (response.status === 200 || response.status === 201) {
         reset();
-        router.push("/login"); // redirect after signup
+        router.push("/login");
       } else {
         setErrorMessage("Something went wrong. Please try again.");
       }
     } catch (error) {
+      console.log("Signup Error:", error?.response);
       setErrorMessage(
-        error?.response?.data?.message ||
-          "Failed to sign up. Please try again."
+        error?.response?.data?.message || "Failed to sign up. Please try again."
       );
     } finally {
       setIsLoading(false);
@@ -133,8 +136,7 @@ export default function Signup() {
                           required: "Password is required",
                           maxLength: {
                             value: 25,
-                            message:
-                              "Password must be less than 25 characters",
+                            message: "Password must be less than 25 characters",
                           },
                           pattern: {
                             value: /^\S*$/,
@@ -172,9 +174,7 @@ export default function Signup() {
                         {...register("companyName", { required: true })}
                       />
                       {errors.companyName && (
-                        <span className="error">
-                          Company name is required
-                        </span>
+                        <span className="error">Company name is required</span>
                       )}
                     </Form.Group>
                   </Col>

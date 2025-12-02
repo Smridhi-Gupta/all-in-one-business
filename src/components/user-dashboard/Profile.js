@@ -1,68 +1,60 @@
-import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import Header from "../components/Header";
-import Form from "react-bootstrap/Form";
-import Sidebar from "../components/Sidebar";
-import Col from "react-bootstrap/Col";
-import Row from "react-bootstrap/Row";
-import prescript from "../Assets/Images/blank.png";
-import editProfile from "../Assets/Images/edit_profile.svg";
-import { IMAGE_URL, BASE_URL_USER, UPLOAD_IMAGE, USER_DETAILS } from "../API";
-import { useDispatch } from "react-redux";
+"use client";
+
+import { useEffect, useState } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 import axios from "axios";
 import { toast } from "react-toastify";
-import { setUser } from "../redux/slices/AdminDetails";
-import Loader from "../components/Loader";
+import { IMAGE_URL, BASE_URL_USER, UPLOAD_IMAGE, USER_DETAILS } from "@/API";
+import Sidebar from "./Sidebar";
+import Loader from "./Loader";
 
 function Profile() {
-  const token = localStorage.getItem("token");
-  const navigate = useNavigate();
-  const [isLoading, setIsLoading] = useState(false);
-  const [userDetail, setUserDetail] = useState([]);
+  const router = useRouter();
 
-  const dispatch = useDispatch();
+  const [isLoading, setIsLoading] = useState(false);
+  const [userDetail, setUserDetail] = useState({});
+
+  const token =
+    typeof window !== "undefined" ? localStorage.getItem("token") : "";
 
   useEffect(() => {
-    getUserDetail();
-  }, []);
+    if (token) getUserDetail();
+  }, [token]);
 
   const getUserDetail = async () => {
     setIsLoading(true);
     try {
-      const headers = { token: token };
+      const headers = { token };
       const response = await axios.get(BASE_URL_USER + USER_DETAILS, {
         headers,
       });
-      console.log(response);
+
       if (response.status === 200 && response.data.status === true) {
         setUserDetail(response.data.data);
-        const userDetail = response.data.data;
-        dispatch(setUser(userDetail));
-        setIsLoading(false);
+        dispatch(setUser(response.data.data));
       }
     } catch (error) {
-      if (error.response && error.response.data) {
-        const errorMessage = error.response.data.message || "An error occurred";
-        toast.error(errorMessage);
-        setIsLoading(false);
-      } else {
-        toast.error("An error occurred");
-        setIsLoading(false);
-      }
+      const errorMessage = error.response?.data?.message || "An error occurred";
+      toast.error(errorMessage);
+    } finally {
+      setIsLoading(false);
     }
-    setIsLoading(false);
   };
 
   const uploadImage = (e) => {
     const allowedTypes = ["image/png", "image/jpg", "image/jpeg"];
+
     if (!e.target.files || e.target.files.length === 0) {
       toast.error("Please select a file.");
       return;
     }
 
     const file = e.target.files[0];
+
     if (!allowedTypes.includes(file.type)) {
-      toast.error("Only JPG, and PNG files are allowed.");
+      toast.error("Only JPG and PNG files are allowed.");
       return;
     }
 
@@ -70,6 +62,7 @@ function Profile() {
       toast.error("File size should not exceed 5MB.");
       return;
     }
+
     imageUploadHandler(file);
   };
 
@@ -77,143 +70,127 @@ function Profile() {
     setIsLoading(true);
     try {
       const headers = {
-        token: token,
+        token,
         "Content-Type": "multipart/form-data",
       };
+
       const formdata = new FormData();
       formdata.append("file", file);
+
       const response = await axios.post(
         BASE_URL_USER + UPLOAD_IMAGE,
         formdata,
         { headers }
       );
+
       if (response.data.code === 200 && response.data.status === true) {
         toast.success(response?.data?.message);
         getUserDetail();
-        setIsLoading(false);
       }
     } catch (error) {
-      if (error.response && error.response.data) {
-        const errorMessage =
-          error.response.data.error_description || "An error occurred";
-        toast.error(errorMessage);
-        setIsLoading(false);
-      } else {
-        toast.error("An error occurred");
-        setIsLoading(false);
-      }
+      const errorMessage =
+        error.response?.data?.error_description || "An error occurred";
+      toast.error(errorMessage);
+    } finally {
+      setIsLoading(false);
     }
-    setIsLoading(false);
   };
+
   return (
     <>
       <Loader isLoading={isLoading} />
-      <div className="container-fluid">
-        <Header />
-        <div className="row">
-          <Sidebar />
-          <div className="col-9 main-dash-left">
-            <section>
-              <div className="comn-back-white">
-                <h3 className="heading-view-med">My Profile</h3>
-                <div className="comm_form_border_box  mt-4">
-                  <section className="back-comn-img">
-                    <div className="custm-container">
-                      <div className="profile_main_page edit-profile-amin">
-                        <Form>
-                          <div className="my-profile-left d-flex employer_logo_edit">
-                            <div className="profile-pic">
-                              <label className="label" htmlFor="file">
-                                <span className="glyphicon glyphicon-camera">
-                                  <img
-                                    src={editProfile}
-                                    alt=""
-                                    className="img-fluid"
-                                  />
-                                </span>
-                              </label>
-                              <Form.Control
-                                id="file"
-                                type="file"
-                                name="profile_picture"
-                                onChange={uploadImage}
-                                accept="image/png, image/jpg, image/jpeg"
-                              />
-                              <figure className="profile-img-edit">
-                                <img
-                                  src={
-                                    userDetail?.image !== null
-                                      ? IMAGE_URL + userDetail?.image
-                                      : prescript
-                                  }
-                                  alt=""
-                                  className="img-fluid"
-                                />
-                              </figure>
-                            </div>
-                            <div className="pair-btns-comn d-flex align-items-center gap-3">
-                              <div
-                                onClick={() =>
-                                  navigate("/edit-profile", {
-                                    state: { ...userDetail },
-                                  })
-                                }
-                              >
-                                <Link className="comn-btn-pair btn btn-primary">
-                                  Edit Profile
-                                </Link>
-                              </div>
-                            </div>
-                          </div>
 
-                          <Row>
-                            <Col md={12}>
-                              <Form.Group
-                                controlId="formGridPassword"
-                                className="comn-class-inputs"
-                              >
-                                <Form.Label>Full Name</Form.Label>
-                                <Form.Control
-                                  type="text"
-                                  placeholder="Enter Your Full Name"
-                                  defaultValue={userDetail?.name}
-                                  disabled
-                                />
-                              </Form.Group>
-                            </Col>
-                            <Col md={12}>
-                              <Form.Group
-                                controlId="formGridEmail"
-                                className="comn-class-inputs"
-                              >
-                                <Form.Label>Email Address</Form.Label>
-                                <Form.Control
-                                  type="email"
-                                  placeholder="Enter Your Email Address"
-                                  defaultValue={userDetail?.email}
-                                  disabled
-                                />
-                              </Form.Group>
-                            </Col>
-                          </Row>
-                          <div className="profile_main_btm_sec">
-                            <div className="d-flex cmm_prf_btm_row profile_auto_pay_row">
-                              <h6>Do you want to update your password?</h6>
-                              <Link
-                                className="comn-btn-pair btn btn-primary"
-                                to="/change-password"
-                              >
-                                Change Password
-                              </Link>
-                            </div>
-                          </div>
-                        </Form>
-                      </div>
-                    </div>
-                  </section>
-                </div>
+      <div className="min-h-screen bg-gray-100 flex">
+        {/* Sidebar */}
+        <Sidebar />
+
+        {/* Main Content */}
+        <div className="flex-1 p-8 ml-16">
+
+          <div className="bg-white rounded-xl shadow p-6 mt-6 max-w-5xl">
+            <h3 className="text-xl font-semibold mb-6">My Profile</h3>
+
+            {/* Profile Top */}
+            <div className="flex items-center gap-6 mb-8">
+              {/* Profile Image */}
+              <div className="relative w-32 h-32">
+                <label
+                  htmlFor="file"
+                  className="absolute -top-2 -right-2 bg-blue-600 p-2 rounded-full cursor-pointer"
+                >
+                  {/* <Image src={editProfile} alt="edit" className="w-5 h-5" /> */}
+                </label>
+
+                <input
+                  id="file"
+                  type="file"
+                  className="hidden"
+                  onChange={uploadImage}
+                  accept="image/png, image/jpg, image/jpeg"
+                />
+
+                {/* <Image
+                  src={
+                    userDetail?.image ? IMAGE_URL + userDetail.image : prescript
+                  }
+                  alt="profile"
+                  width={128}
+                  height={128}
+                  className="w-32 h-32 rounded-full object-cover border"
+                /> */}
               </div>
-            </section>
+
+              {/* Edit Button */}
+              <button
+                onClick={() =>
+                  router.push(`/edit-profile?id=${userDetail?._id}`)
+                }
+                className="bg-blue-600 text-white px-5 py-2 rounded-md hover:bg-blue-700 transition"
+              >
+                Edit Profile
+              </button>
+            </div>
+
+            {/* Profile Fields */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <label className="block text-sm font-medium mb-1">
+                  Full Name
+                </label>
+                <input
+                  type="text"
+                  disabled
+                  value={userDetail?.name || ""}
+                  className="w-full border rounded-md px-4 py-2 bg-gray-100 cursor-not-allowed"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium mb-1">
+                  Email Address
+                </label>
+                <input
+                  type="email"
+                  disabled
+                  value={userDetail?.email || ""}
+                  className="w-full border rounded-md px-4 py-2 bg-gray-100 cursor-not-allowed"
+                />
+              </div>
+            </div>
+
+            {/* Change Password */}
+            <div className="flex items-center justify-between mt-10 bg-gray-50 p-4 rounded-md">
+              <h6 className="text-sm font-medium">
+                Do you want to update your password?
+              </h6>
+
+              <Link
+                href="/change-password"
+                className="bg-blue-600 text-white px-5 py-2 rounded-md hover:bg-blue-700 transition"
+              >
+                Change Password
+              </Link>
+            </div>
           </div>
         </div>
       </div>

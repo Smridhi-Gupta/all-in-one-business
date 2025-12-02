@@ -1,11 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import Form from "react-bootstrap/Form";
 import Link from "next/link";
-import Button from "react-bootstrap/Button";
-import Col from "react-bootstrap/Col";
-import Row from "react-bootstrap/Row";
 import Image from "next/image";
 import { useForm } from "react-hook-form";
 import axios from "axios";
@@ -50,69 +46,77 @@ export default function ForgetPassword() {
     <>
       <Loader isLoading={isLoading} />
 
-      <section className="login-section">
-        <div className="container-fluid g-0">
-          <Row className="row-min-h">
-            {/* Left Image */}
-            <Col lg={6} className="img-n">
-              <div className="upper-fig-main-login">
-                <figure className="login-img-main">
-                  <Image src={loginimg} alt="login" className="img-fluid" />
-                </figure>
+      <section className="min-h-screen flex">
+        {/* Left Image Section */}
+        <div className="hidden lg:flex w-1/2 items-center justify-center bg-gray-100">
+          <figure className="w-full h-full">
+            <Image
+              src={loginimg}
+              alt="login"
+              className="object-cover w-full h-full"
+              priority
+            />
+          </figure>
+        </div>
+
+        {/* Right Form Section */}
+        <div className="w-full lg:w-1/2 flex items-center justify-center px-6">
+          <div className="w-full max-w-md bg-white shadow-lg rounded-xl p-8">
+            {/* Logo */}
+            <div className="flex justify-center mb-6">
+              <figure
+                onClick={() => router.push("/")}
+                className="cursor-pointer"
+              >
+                <Image src={logo} alt="logo" className="h-14 w-auto" />
+              </figure>
+            </div>
+
+            <h2 className="text-2xl font-semibold text-center mb-2">
+              Forgot Password
+            </h2>
+            <p className="text-sm text-gray-500 text-center mb-6">
+              Don’t worry, we will help you recover your password
+            </p>
+
+            <form onSubmit={handleSubmit(submitHandler)} className="space-y-5">
+              {/* Email */}
+              <div>
+                <label className="block text-sm font-medium mb-1">
+                  Email Address
+                </label>
+                <input
+                  type="email"
+                  placeholder="Enter Your Email Address"
+                  className="w-full border rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  {...register("email", { required: true })}
+                />
+                {errors.email && (
+                  <span className="text-red-500 text-xs">
+                    E-mail is required
+                  </span>
+                )}
               </div>
-            </Col>
 
-            {/* Right Form */}
-            <Col lg={6}>
-              <div className="inner-login-mian">
-                <div className="loginupper-right">
-                  <figure
-                    className="creden_page_logo"
-                    onClick={() => router.push("/")}
-                    style={{ cursor: "pointer" }}
-                  >
-                    <Image src={logo} alt="logo" className="img-fluid" />
-                  </figure>
+              {/* Button */}
+              <button
+                type="submit"
+                className="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition"
+              >
+                Reset Password
+              </button>
 
-                  <h2>Forgot Password</h2>
-                  <p className="forg-pass-text">
-                    Don’t worry we will help you recover your password
-                  </p>
-
-                  <Form onSubmit={handleSubmit(submitHandler)}>
-                    <Row>
-                      <Col md={12}>
-                        <Form.Group
-                          controlId="formGridEmail"
-                          className="comn-class-inputs"
-                        >
-                          <Form.Label>Email Address</Form.Label>
-                          <Form.Control
-                            type="email"
-                            placeholder="Enter Your Email Address"
-                            {...register("email", { required: true })}
-                          />
-                          {errors.email && (
-                            <span className="error">E-mail is required</span>
-                          )}
-                        </Form.Group>
-                      </Col>
-                    </Row>
-
-                    <Button className="login-btn" type="submit">
-                      Reset Password
-                    </Button>
-
-                    <div className="text-center mt-3">
-                      <Link href="/login" className="link_back_btn">
-                        Back to Login
-                      </Link>
-                    </div>
-                  </Form>
-                </div>
+              {/* Back to Login */}
+              <div className="text-center mt-3">
+                <Link
+                  href="/login"
+                  className="text-blue-600 hover:underline text-sm"
+                >
+                  Back to Login
+                </Link>
               </div>
-            </Col>
-          </Row>
+            </form>
+          </div>
         </div>
       </section>
     </>

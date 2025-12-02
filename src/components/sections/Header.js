@@ -334,6 +334,8 @@ const Header = () => {
 
           <Link
             href="/login"
+            target="_blank"
+            rel="noopener noreferrer"
             className="text-sm px-4 py-1.5 border border-gray-300 rounded-md hover:bg-gray-100"
           >
             Login

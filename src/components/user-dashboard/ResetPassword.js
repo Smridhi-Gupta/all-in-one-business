@@ -2,11 +2,6 @@
 
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
-import Col from "react-bootstrap/Col";
-import Row from "react-bootstrap/Row";
-
 import { useRouter, useSearchParams } from "next/navigation";
 import { useForm } from "react-hook-form";
 import axios from "axios";
@@ -43,7 +38,7 @@ export default function ResetPassword() {
     if (typeof window !== "undefined" && localStorage.getItem("token")) {
       router.push("/dashboard");
     }
-  }, []);
+  }, [router]);
 
   // Validate security code
   useEffect(() => {
@@ -83,7 +78,10 @@ export default function ResetPassword() {
     formData.append("security_code", securityCode);
 
     try {
-      const response = await axios.post(BASE_URL_USER + RESET_PASSWORD, formData);
+      const response = await axios.post(
+        BASE_URL_USER + RESET_PASSWORD,
+        formData
+      );
 
       toast.success(
         response?.data?.data?.message || "Password reset successful"
@@ -98,146 +96,148 @@ export default function ResetPassword() {
   };
 
   return (
-    <section className="login-section">
-      <div className="container-fluid g-0">
-        <Row className="row-min-h">
+    <section className="min-h-screen flex">
+      {/* LEFT IMAGE */}
+      <div className="hidden lg:flex w-1/2 items-center justify-center bg-gray-100">
+        <Image
+          src={loginimg}
+          alt="Login Visual"
+          className="object-cover w-full h-full"
+          priority
+        />
+      </div>
 
-          {/* LEFT IMAGE */}
-          <Col lg={6} className="img-n">
-            <div className="upper-fig-main-login">
-              <figure className="login-img-main">
-                <Image src={loginimg} alt="Login Visual" className="img-fluid" />
-              </figure>
-            </div>
-          </Col>
+      {/* RIGHT FORM */}
+      <div className="w-full lg:w-1/2 flex items-center justify-center px-6">
+        <div className="w-full max-w-md bg-white shadow-lg rounded-xl p-8">
+          <h2 className="text-2xl font-semibold text-center mb-6">
+            Reset Password
+          </h2>
 
-          {/* RIGHT FORM */}
-          <Col lg={6}>
-            <div className="inner-login-mian">
-              <div className="loginupper-right">
-                <h2>Reset Password</h2>
+          {loading ? (
+            <p className="text-center text-gray-500">Validating your link...</p>
+          ) : isLinkValid ? (
+            <form onSubmit={handleSubmit(submitHandler)} className="space-y-5">
+              {/* New Password */}
+              <div>
+                <label className="block text-sm font-medium mb-1">
+                  New Password
+                </label>
 
-                {loading ? (
-                  <p>Validating your link...</p>
-                ) : isLinkValid ? (
-                  <Form onSubmit={handleSubmit(submitHandler)}>
-                    <Row>
+                <div className="relative">
+                  <input
+                    type={showPassword ? "text" : "password"}
+                    placeholder="Enter New Password"
+                    onKeyDown={(e) => {
+                      if (e.key === " ") e.preventDefault();
+                    }}
+                    className="w-full border rounded-md px-4 py-2 pr-10 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    {...register("newPassword", {
+                      required: "This field is required",
+                      maxLength: {
+                        value: 25,
+                        message: "Password must be less than 25 characters",
+                      },
+                      pattern: {
+                        value:
+                          /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]).{8,}$/,
+                        message:
+                          "Password must include uppercase, lowercase, number, special character.",
+                      },
+                    })}
+                  />
 
-                      {/* New Password */}
-                      <Col md={12}>
-                        <Form.Group className="comn-class-inputs">
-                          <Form.Label>New Password</Form.Label>
+                  <span
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="absolute top-1/2 right-3 -translate-y-1/2 cursor-pointer text-gray-500"
+                  >
+                    {showPassword ? (
+                      <AiOutlineEye />
+                    ) : (
+                      <AiOutlineEyeInvisible />
+                    )}
+                  </span>
+                </div>
 
-                          <div className="cstPassGroup">
-                            <Form.Control
-                              type={showPassword ? "text" : "password"}
-                              placeholder="Enter New Password"
-                              onKeyDown={(e) => {
-                                if (e.key === " ") e.preventDefault();
-                              }}
-                              {...register("newPassword", {
-                                required: "This field is required",
-                                maxLength: {
-                                  value: 25,
-                                  message:
-                                    "Password must be less than 25 characters",
-                                },
-                                pattern: {
-                                  value:
-                                    /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]).{8,}$/,
-                                  message:
-                                    "Password must include uppercase, lowercase, number, special character.",
-                                },
-                              })}
-                            />
-
-                            <div
-                              onClick={() => setShowPassword(!showPassword)}
-                              className="eyeToggleBtn"
-                            >
-                              {showPassword ? (
-                                <AiOutlineEye />
-                              ) : (
-                                <AiOutlineEyeInvisible />
-                              )}
-                            </div>
-                          </div>
-
-                          {errors.newPassword && (
-                            <p className="error">{errors.newPassword.message}</p>
-                          )}
-                        </Form.Group>
-                      </Col>
-
-                      {/* Confirm Password */}
-                      <Col md={12}>
-                        <Form.Group className="comn-class-inputs">
-                          <Form.Label>Confirm New Password</Form.Label>
-
-                          <div className="cstPassGroup">
-                            <Form.Control
-                              type={showPassword1 ? "text" : "password"}
-                              placeholder="Confirm New Password"
-                              onKeyDown={(e) => {
-                                if (e.key === " ") e.preventDefault();
-                              }}
-                              {...register("confirmPassword", {
-                                required: "This field is required",
-                                maxLength: {
-                                  value: 25,
-                                  message:
-                                    "Password must be less than 25 characters",
-                                },
-                                validate: (value) =>
-                                  value === newPassword ||
-                                  "New password and confirm must match.",
-                              })}
-                            />
-
-                            <div
-                              onClick={() => setShowPassword1(!showPassword1)}
-                              className="eyeToggleBtn"
-                            >
-                              {showPassword1 ? (
-                                <AiOutlineEye />
-                              ) : (
-                                <AiOutlineEyeInvisible />
-                              )}
-                            </div>
-                          </div>
-
-                          {errors.confirmPassword && (
-                            <p className="error">
-                              {errors.confirmPassword.message}
-                            </p>
-                          )}
-                        </Form.Group>
-                      </Col>
-
-                    </Row>
-
-                    <Button className="login-btn" type="submit">
-                      Reset Password
-                    </Button>
-                  </Form>
-                ) : (
-                  <>
-                    <h2 style={{ color: "#bb2125" }}>
-                      Your password reset link has expired or is invalid.
-                    </h2>
-
-                    <div className="auth-bottom-link-sec">
-                      <p style={{ fontSize: "20px" }}>
-                        Please request a new reset link{" "}
-                        <Link href="/forgotpassword">here</Link>.
-                      </p>
-                    </div>
-                  </>
+                {errors.newPassword && (
+                  <p className="text-red-500 text-xs mt-1">
+                    {errors.newPassword.message}
+                  </p>
                 )}
               </div>
-            </div>
-          </Col>
-        </Row>
+
+              {/* Confirm Password */}
+              <div>
+                <label className="block text-sm font-medium mb-1">
+                  Confirm New Password
+                </label>
+
+                <div className="relative">
+                  <input
+                    type={showPassword1 ? "text" : "password"}
+                    placeholder="Confirm New Password"
+                    onKeyDown={(e) => {
+                      if (e.key === " ") e.preventDefault();
+                    }}
+                    className="w-full border rounded-md px-4 py-2 pr-10 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    {...register("confirmPassword", {
+                      required: "This field is required",
+                      maxLength: {
+                        value: 25,
+                        message: "Password must be less than 25 characters",
+                      },
+                      validate: (value) =>
+                        value === newPassword ||
+                        "New password and confirm must match.",
+                    })}
+                  />
+
+                  <span
+                    onClick={() => setShowPassword1(!showPassword1)}
+                    className="absolute top-1/2 right-3 -translate-y-1/2 cursor-pointer text-gray-500"
+                  >
+                    {showPassword1 ? (
+                      <AiOutlineEye />
+                    ) : (
+                      <AiOutlineEyeInvisible />
+                    )}
+                  </span>
+                </div>
+
+                {errors.confirmPassword && (
+                  <p className="text-red-500 text-xs mt-1">
+                    {errors.confirmPassword.message}
+                  </p>
+                )}
+              </div>
+
+              {/* Submit Button */}
+              <button
+                type="submit"
+                className="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition"
+              >
+                Reset Password
+              </button>
+            </form>
+          ) : (
+            <>
+              <h2 className="text-red-600 text-xl font-semibold text-center mb-4">
+                Your password reset link has expired or is invalid.
+              </h2>
+
+              <p className="text-center text-gray-600">
+                Please request a new reset link{" "}
+                <Link
+                  href="/forgotpassword"
+                  className="text-blue-600 hover:underline"
+                >
+                  here
+                </Link>
+                .
+              </p>
+            </>
+          )}
+        </div>
       </div>
     </section>
   );

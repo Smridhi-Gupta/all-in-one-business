@@ -1,15 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
-import Header from "@/components/Header";
-import Form from "react-bootstrap/Form";
 import Sidebar from "@/components/Sidebar";
-import Button from "react-bootstrap/Button";
-import Col from "react-bootstrap/Col";
-import Row from "react-bootstrap/Row";
-import Breadcrumb from "react-bootstrap/Breadcrumb";
 import { BASE_URL_USER, CHANGE_PASSWORD } from "@/API";
 import axios from "axios";
 import { toast } from "react-toastify";
@@ -52,7 +45,8 @@ export default function ChangePassword() {
 
     try {
       const token = localStorage.getItem("token");
-      const headers = { token: token };
+      const headers = { token };
+
       const response = await axios.post(
         BASE_URL_USER + CHANGE_PASSWORD,
         formData,
@@ -65,13 +59,9 @@ export default function ChangePassword() {
         router.push("/profile");
       }
     } catch (error) {
-      if (error.response && error.response.data) {
-        const errorMessage =
-          error.response.data.error_description || "An error occurred";
-        toast.error(errorMessage);
-      } else {
-        toast.error("An error occurred");
-      }
+      const errorMessage =
+        error.response?.data?.error_description || "An error occurred";
+      toast.error(errorMessage);
     } finally {
       setIsLoading(false);
     }
@@ -81,178 +71,158 @@ export default function ChangePassword() {
     <>
       <Loader isLoading={isLoading} />
 
-      <div className="container-fluid">
-        <Header />
+      <div className="min-h-screen bg-gray-100 flex">
+        {/* Sidebar */}
+        <Sidebar />
 
-        <div className="row">
-          <Sidebar />
-
-          <div className="col-9 main-dash-left">
-            <Breadcrumb
-              className="cstm_bredcrumb"
-              listProps={{ className: "breadcrumb-custom-separator" }}
+        {/* Main Content */}
+        <div className="flex-1 p-8 ml-16">
+          {/* Breadcrumb */}
+          <div className="text-sm text-gray-500 mb-6">
+            <span
+              onClick={() => router.push("/profile")}
+              className="cursor-pointer hover:text-blue-600"
             >
-              <Breadcrumb.Item linkAs={Link} href="/profile">
-                My Profile
-              </Breadcrumb.Item>
+              My Profile
+            </span>{" "}
+            / <span className="text-gray-800 font-medium">Change Password</span>
+          </div>
 
-              <Breadcrumb.Item active>
-                Change Password
-              </Breadcrumb.Item>
-            </Breadcrumb>
+          {/* Card */}
+          <div className="bg-white rounded-xl shadow p-6 max-w-4xl">
+            <h3 className="text-xl font-semibold mb-6">Change Password</h3>
 
-            <section>
-              <div className="comn-back-white">
-                <h3 className="heading-view-med">Change password</h3>
-
-                <div className="comm_form_border_box mt-4">
-                  <section className="back-comn-img">
-                    <div className="custm-container">
-                      <div className="edit-profile-amin">
-
-                        <Form onSubmit={handleSubmit(changePasswordHandler)}>
-                          <Row>
-                            {/* Old Password */}
-                            <Col md={6}>
-                              <Form.Group className="comn-class-inputs">
-                                <Form.Label>Old Password</Form.Label>
-
-                                <div className="cstPassGroup">
-                                  <Form.Control
-                                    type={showPassword1 ? "text" : "password"}
-                                    placeholder="Enter Old Password"
-                                    {...register("old_password", {
-                                      required: "Please enter old password.",
-                                    })}
-                                  />
-                                  <div
-                                    onClick={() =>
-                                      setShowPassword1(!showPassword1)
-                                    }
-                                    className="eyeToggleBtn"
-                                  >
-                                    {showPassword1 ? (
-                                      <AiOutlineEye />
-                                    ) : (
-                                      <AiOutlineEyeInvisible />
-                                    )}
-                                  </div>
-                                </div>
-
-                                {errors.old_password && (
-                                  <p className="error">
-                                    {errors.old_password.message}
-                                  </p>
-                                )}
-                              </Form.Group>
-                            </Col>
-
-                            {/* New Password */}
-                            <Col md={6}>
-                              <Form.Group className="comn-class-inputs">
-                                <Form.Label>New Password</Form.Label>
-
-                                <div className="cstPassGroup">
-                                  <Form.Control
-                                    type={showPassword2 ? "text" : "password"}
-                                    placeholder="Enter New Password"
-                                    {...register("new_password", {
-                                      required: "Please enter new password",
-                                      maxLength: {
-                                        value: 25,
-                                        message:
-                                          "Password must be less than 25 characters",
-                                      },
-                                      pattern: {
-                                        value:
-                                          /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]).{8,}$/,
-                                        message:
-                                          "Password must contain uppercase, lowercase, number & special character.",
-                                      },
-                                    })}
-                                  />
-                                  <div
-                                    onClick={() =>
-                                      setShowPassword2(!showPassword2)
-                                    }
-                                    className="eyeToggleBtn"
-                                  >
-                                    {showPassword2 ? (
-                                      <AiOutlineEye />
-                                    ) : (
-                                      <AiOutlineEyeInvisible />
-                                    )}
-                                  </div>
-                                </div>
-
-                                {errors.new_password && (
-                                  <p className="error">
-                                    {errors.new_password.message}
-                                  </p>
-                                )}
-                              </Form.Group>
-                            </Col>
-
-                            {/* Confirm Password */}
-                            <Col md={6}>
-                              <Form.Group className="comn-class-inputs">
-                                <Form.Label>Confirm New Password</Form.Label>
-
-                                <div className="cstPassGroup">
-                                  <Form.Control
-                                    type={showPassword3 ? "text" : "password"}
-                                    placeholder="Confirm New Password"
-                                    {...register("new_password2", {
-                                      required:
-                                        "Please enter confirm new password",
-                                      validate: (value) =>
-                                        value === watch("new_password") ||
-                                        "New password and confirm password do not match.",
-                                    })}
-                                  />
-                                  <div
-                                    onClick={() =>
-                                      setShowPassword3(!showPassword3)
-                                    }
-                                    className="eyeToggleBtn"
-                                  >
-                                    {showPassword3 ? (
-                                      <AiOutlineEye />
-                                    ) : (
-                                      <AiOutlineEyeInvisible />
-                                    )}
-                                  </div>
-                                </div>
-
-                                {errors.new_password2 && (
-                                  <p className="error">
-                                    {errors.new_password2.message}
-                                  </p>
-                                )}
-                              </Form.Group>
-                            </Col>
-                          </Row>
-
-                          <div className="pair-btns-comn d-flex align-items-center gap-3 mt-3">
-                            <Button className="comn-btn-pair" type="submit">
-                              Update Password
-                            </Button>
-
-                            <Button
-                              className="comn-btn-pair back-white-btn"
-                              onClick={() => router.push("/profile")}
-                            >
-                              Discard
-                            </Button>
-                          </div>
-                        </Form>
-
-                      </div>
-                    </div>
-                  </section>
+            <form
+              onSubmit={handleSubmit(changePasswordHandler)}
+              className="grid grid-cols-1 md:grid-cols-2 gap-6"
+            >
+              {/* Old Password */}
+              <div>
+                <label className="block text-sm font-medium mb-1">
+                  Old Password
+                </label>
+                <div className="relative">
+                  <input
+                    type={showPassword1 ? "text" : "password"}
+                    placeholder="Enter Old Password"
+                    className="w-full border rounded-md px-4 py-2 pr-10 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    {...register("old_password", {
+                      required: "Please enter old password.",
+                    })}
+                  />
+                  <span
+                    onClick={() => setShowPassword1(!showPassword1)}
+                    className="absolute top-1/2 right-3 -translate-y-1/2 cursor-pointer text-gray-500"
+                  >
+                    {showPassword1 ? (
+                      <AiOutlineEye />
+                    ) : (
+                      <AiOutlineEyeInvisible />
+                    )}
+                  </span>
                 </div>
+                {errors.old_password && (
+                  <p className="text-red-500 text-xs mt-1">
+                    {errors.old_password.message}
+                  </p>
+                )}
               </div>
-            </section>
+
+              {/* New Password */}
+              <div>
+                <label className="block text-sm font-medium mb-1">
+                  New Password
+                </label>
+                <div className="relative">
+                  <input
+                    type={showPassword2 ? "text" : "password"}
+                    placeholder="Enter New Password"
+                    className="w-full border rounded-md px-4 py-2 pr-10 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    {...register("new_password", {
+                      required: "Please enter new password",
+                      maxLength: {
+                        value: 25,
+                        message: "Password must be less than 25 characters",
+                      },
+                      pattern: {
+                        value:
+                          /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]).{8,}$/,
+                        message:
+                          "Password must contain uppercase, lowercase, number & special character.",
+                      },
+                    })}
+                  />
+                  <span
+                    onClick={() => setShowPassword2(!showPassword2)}
+                    className="absolute top-1/2 right-3 -translate-y-1/2 cursor-pointer text-gray-500"
+                  >
+                    {showPassword2 ? (
+                      <AiOutlineEye />
+                    ) : (
+                      <AiOutlineEyeInvisible />
+                    )}
+                  </span>
+                </div>
+                {errors.new_password && (
+                  <p className="text-red-500 text-xs mt-1">
+                    {errors.new_password.message}
+                  </p>
+                )}
+              </div>
+
+              {/* Confirm Password */}
+              <div>
+                <label className="block text-sm font-medium mb-1">
+                  Confirm New Password
+                </label>
+                <div className="relative">
+                  <input
+                    type={showPassword3 ? "text" : "password"}
+                    placeholder="Confirm New Password"
+                    className="w-full border rounded-md px-4 py-2 pr-10 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    {...register("new_password2", {
+                      required: "Please enter confirm new password",
+                      validate: (value) =>
+                        value === watch("new_password") ||
+                        "New password and confirm password do not match.",
+                    })}
+                  />
+                  <span
+                    onClick={() => setShowPassword3(!showPassword3)}
+                    className="absolute top-1/2 right-3 -translate-y-1/2 cursor-pointer text-gray-500"
+                  >
+                    {showPassword3 ? (
+                      <AiOutlineEye />
+                    ) : (
+                      <AiOutlineEyeInvisible />
+                    )}
+                  </span>
+                </div>
+                {errors.new_password2 && (
+                  <p className="text-red-500 text-xs mt-1">
+                    {errors.new_password2.message}
+                  </p>
+                )}
+              </div>
+
+              {/* Buttons */}
+              <div className="md:col-span-2 flex gap-4 mt-4">
+                <button
+                  type="submit"
+                  className="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 transition"
+                >
+                  Update Password
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => router.push("/profile")}
+                  className="border border-gray-300 px-6 py-2 rounded-md hover:bg-gray-100 transition"
+                >
+                  Discard
+                </button>
+              </div>
+            </form>
           </div>
         </div>
       </div>

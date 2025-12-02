@@ -1,15 +1,8 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Image from "next/image";
-import Button from "react-bootstrap/Button";
-import Modal from "react-bootstrap/Modal";
-import { toast } from "react-toastify";
-
 import { useRouter, usePathname } from "next/navigation";
-
-import logo from "@/Assets/Images/LoneStarInnovationo-Logo.png";
-import deleteimg from "@/Assets/Images/logImage.svg";
+import { toast } from "react-toastify";
 
 export default function Sidebar() {
   const router = useRouter();
@@ -17,7 +10,7 @@ export default function Sidebar() {
 
   const [show, setShow] = useState(false);
   const [activeMenu, setActiveMenu] = useState(pathname);
-  const [isToggled, setIsToggled] = useState(false);
+  const [isToggled, setIsToggled] = useState(true); // ✅ default expanded
 
   useEffect(() => {
     setActiveMenu(pathname);
@@ -34,102 +27,118 @@ export default function Sidebar() {
 
   return (
     <>
-      <div className={`sidebar col-3 ${isToggled ? "active-sidebar" : ""}`}>
-        <div className="toggl-main" onClick={handleToggle}>
-          <i className="fa-solid fa-bars"></i>
-        </div>
-
-        <div className="sidebar-wrapper d-flex">
-          <div className="sidebar-content">
-
-            {/* Sidebar Logo */}
-            <div className="sidebar-logo">
-              {/* Uncomment if you need logo click */}
-              {/* <figure className="text-center" onClick={() => router.push("/dashboard")}>
-                <Image src={logo} alt="Logo" className="img-fluid" />
-              </figure> */}
-            </div>
-
-            <ul className="slide-navli">
-
-              {/* MAIN SECTION */}
-              <li className="sidebar-section-heading">Main</li>
-
-              <li
-                className={`inner-slide-li subitem ${
-                  activeMenu === "/create-form" ? "active" : ""
-                }`}
-                onClick={() => router.push("/create-form")}
-              >
-                + New Service
-              </li>
-
-              <li
-                className={`inner-slide-li subitem ${
-                  activeMenu === "/services" ? "active" : ""
-                }`}
-                onClick={() => router.push("/services")}
-              >
-                Services
-              </li>
-
-              {/* ACCOUNT SECTION */}
-              <li className="sidebar-section-heading">Account</li>
-
-              <li
-                className={`inner-slide-li subitem ${
-                  activeMenu === "/profile" ||
-                  activeMenu === "/change-password"
-                    ? "active"
-                    : ""
-                }`}
-                onClick={() => router.push("/profile")}
-              >
-                Settings
-              </li>
-
-              <li className="inner-slide-li logout subitem" onClick={() => setShow(true)}>
-                Logout
-              </li>
-
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      {/* Logout Confirmation Modal */}
-      <Modal
-        show={show}
-        onHide={() => setShow(false)}
-        centered
-        className="modal-delete-logout"
+      {/* ✅ Sidebar Wrapper */}
+      <aside
+        className={`fixed top-0 left-0 h-screen bg-gray-900 text-white z-40
+        transition-all duration-300 ease-in-out
+        ${isToggled ? "w-64" : "w-20"}`}
       >
-        <Modal.Body className="p-0">
-          <div className="inner-body-delete-logout">
+        {/* ✅ Toggle Button */}
+        <div
+          className="flex items-center justify-center h-16 border-b border-gray-700 cursor-pointer"
+          onClick={handleToggle}
+        >
+          <i className="fa-solid fa-bars text-xl"></i>
+        </div>
 
-            <div className="img-modal">
-              <figure>
-                <Image src={deleteimg} alt="Logout Confirm" />
-              </figure>
-            </div>
+        {/* ✅ Menu */}
+        <nav className="px-3 py-4">
+          <ul className="space-y-1 text-sm">
+            {/* MAIN */}
+            <li className="text-gray-400 uppercase tracking-wide mb-2 px-2">
+              Main
+            </li>
 
-            <h4>Are you sure you want to logout?</h4>
+            <li
+              className={`flex items-center gap-3 px-3 py-2 rounded-md cursor-pointer transition
+                ${
+                  activeMenu === "/user-form"
+                    ? "bg-blue-600 text-white"
+                    : "text-gray-300 hover:bg-gray-700"
+                }`}
+              onClick={() => router.push("/user-form")}
+            >
+              <span className="text-lg">+</span>
+              <span className={`${!isToggled && "hidden"}`}>New Service</span>
+            </li>
 
-            <div className="upper-btns-modal-pair">
-              <Button className="comn-modal-btns-blue" onClick={logoutHandler}>
+            <li
+              className={`flex items-center gap-3 px-3 py-2 rounded-md cursor-pointer transition
+                ${
+                  activeMenu === "/service-form"
+                    ? "bg-blue-600 text-white"
+                    : "text-gray-300 hover:bg-gray-700"
+                }`}
+              onClick={() => router.push("/service-form")}
+            >
+              <span>📋</span>
+              <span className={`${!isToggled && "hidden"}`}>Services</span>
+            </li>
+
+            {/* ACCOUNT */}
+            <li className="text-gray-400 uppercase tracking-wide mt-5 mb-2 px-2">
+              Account
+            </li>
+
+            <li
+              className={`flex items-center gap-3 px-3 py-2 rounded-md cursor-pointer transition
+                ${
+                  activeMenu === "/profile" || activeMenu === "/change-password"
+                    ? "bg-blue-600 text-white"
+                    : "text-gray-300 hover:bg-gray-700"
+                }`}
+              onClick={() => router.push("/profile")}
+            >
+              <span>⚙️</span>
+              <span className={`${!isToggled && "hidden"}`}>Settings</span>
+            </li>
+
+            <li
+              className="flex items-center gap-3 px-3 py-2 mt-3 rounded-md text-red-400 hover:bg-red-600 hover:text-white transition cursor-pointer"
+              onClick={() => {
+                localStorage.removeItem("token"); // clear token
+                router.push("/"); // redirect to homepage
+              }}
+            >
+              <span>🚪</span>
+              <span className={`${!isToggled && "hidden"}`}>Logout</span>
+            </li>
+          </ul>
+        </nav>
+      </aside>
+
+      {/* ✅ Spacer for Content (IMPORTANT FIX) */}
+      <div
+        className={`transition-all duration-300
+        ${isToggled ? "ml-64" : "ml-20"}`}
+      />
+
+      {/* ✅ Logout Modal */}
+      {show && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-[999]">
+          <div className="bg-white rounded-lg w-[90%] max-w-md p-6 text-center">
+            <h4 className="text-lg font-semibold mb-4 text-gray-800">
+              Are you sure you want to logout?
+            </h4>
+
+            <div className="flex justify-center gap-4">
+              <button
+                onClick={logoutHandler}
+                className="bg-red-600 text-white px-5 py-2 rounded-md hover:bg-red-700 transition"
+              >
                 Yes, Logout
-              </Button>
-              <Button
-                className="comn-modal-btns-transparent"
+              </button>
+
+              <button
                 onClick={() => setShow(false)}
+                className="border border-gray-400 px-5 py-2 rounded-md hover:bg-gray-100 transition"
               >
                 No, Stay Here
-              </Button>
+              </button>
             </div>
-
           </div>
-        </Modal.Body>
-      </Modal>
+        </div>
+      )}
     </>
   );
 }

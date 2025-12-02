@@ -1,15 +1,8 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import Link from "next/link";
+import { useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import Header from "@/components/Header";
-import Form from "react-bootstrap/Form";
 import Sidebar from "@/components/Sidebar";
-import Button from "react-bootstrap/Button";
-import Col from "react-bootstrap/Col";
-import Row from "react-bootstrap/Row";
-import Breadcrumb from "react-bootstrap/Breadcrumb";
 import { BASE_URL_USER, UPDATE_PROFILE } from "@/API";
 import axios from "axios";
 import { toast } from "react-toastify";
@@ -21,8 +14,6 @@ export default function EditProfile() {
 
   const [isLoading, setIsLoading] = useState(false);
 
-  // ⛔ Next.js does NOT support location.state
-  // So we take from query params OR API fetch
   const userDetail = {
     name: searchParams.get("name") || "",
     email: searchParams.get("email") || "",
@@ -30,7 +21,9 @@ export default function EditProfile() {
 
   const [name, setName] = useState(userDetail?.name || "");
   const [error, setError] = useState("");
-  const token = typeof window !== "undefined" ? localStorage.getItem("token") : "";
+
+  const token =
+    typeof window !== "undefined" ? localStorage.getItem("token") : "";
 
   // ----------------------- Update Handler -----------------------
   const updateProfile = async () => {
@@ -38,9 +31,8 @@ export default function EditProfile() {
 
     setIsLoading(true);
     try {
-      const headers = { token: token };
+      const headers = { token };
       const formdata = new FormData();
-
       formdata.append("name", name || userDetail?.name);
 
       const response = await axios.post(
@@ -54,13 +46,9 @@ export default function EditProfile() {
         router.push("/profile");
       }
     } catch (error) {
-      if (error.response && error.response.data) {
-        const errorMessage =
-          error.response.data.error_description || "An error occurred";
-        toast.error(errorMessage);
-      } else {
-        toast.error("An error occurred");
-      }
+      const errorMessage =
+        error.response?.data?.error_description || "An error occurred";
+      toast.error(errorMessage);
     } finally {
       setIsLoading(false);
     }
@@ -70,118 +58,98 @@ export default function EditProfile() {
     <>
       <Loader isLoading={isLoading} />
 
-      <div className="container-fluid">
-        <Header />
+      <div className="min-h-screen bg-gray-100 flex">
+        {/* Sidebar */}
+        <Sidebar />
 
-        <div className="row">
-          <Sidebar />
-
-          <div className="col-9 main-dash-left">
-            <Breadcrumb
-              className="cstm_bredcrumb"
-              listProps={{ className: "breadcrumb-custom-separator" }}
+        {/* Main Content */}
+        <div className="flex-1 p-8 ml-16">
+          {/* Breadcrumb */}
+          <div className="text-sm text-gray-500 mb-6">
+            <span
+              onClick={() => router.push("/profile")}
+              className="cursor-pointer hover:text-blue-600"
             >
-              <Breadcrumb.Item linkAs={Link} href="/profile">
-                My Profile
-              </Breadcrumb.Item>
+              My Profile
+            </span>{" "}
+            / <span className="text-gray-800 font-medium">Edit Profile</span>
+          </div>
 
-              <Breadcrumb.Item active>
-                Edit Profile
-              </Breadcrumb.Item>
-            </Breadcrumb>
+          {/* Card */}
+          <div className="bg-white rounded-xl shadow p-6 max-w-4xl">
+            <h3 className="text-xl font-semibold mb-6">Update Profile</h3>
 
-            <section>
-              <div className="comn-back-white">
-                <h3 className="heading-view-med">Update Profile</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {/* Full Name */}
+              <div>
+                <label className="block text-sm font-medium mb-1">
+                  Full Name
+                </label>
 
-                <div className="comm_form_border_box mt-4">
-                  <section className="back-comn-img">
-                    <div className="custm-container">
-                      <div className="edit-profile-amin">
-                        <Form>
-                          <Row>
-                            {/* Full Name */}
-                            <Col md={6}>
-                              <Form.Group className="comn-class-inputs">
-                                <Form.Label>Full Name</Form.Label>
+                <input
+                  type="text"
+                  placeholder="Enter Your Full Name"
+                  defaultValue={userDetail?.name}
+                  className="w-full border rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  onChange={(e) => {
+                    let value = e.target.value;
 
-                                <Form.Control
-                                  type="text"
-                                  placeholder="Enter Your Full Name"
-                                  defaultValue={userDetail?.name}
-                                  onChange={(e) => {
-                                    let value = e.target.value;
+                    if (
+                      /^\s/.test(value) ||
+                      /\s{2,}/.test(value) ||
+                      /\s$/.test(value)
+                    ) {
+                      setError(
+                        "Input cannot start or end with spaces, and cannot have multiple spaces."
+                      );
+                    } else if (value.length >= 50) {
+                      setError("Value cannot exceed 50 characters");
+                    } else if (value.trim() === "") {
+                      setError("Please enter full name.");
+                    } else if (value.length < 3) {
+                      setError("Full name must be at least 3 characters long");
+                    } else {
+                      setError("");
+                    }
 
-                                    if (
-                                      /^\s/.test(value) ||
-                                      /\s{2,}/.test(value) ||
-                                      /\s$/.test(value)
-                                    ) {
-                                      setError(
-                                        "Input cannot start or end with spaces, and cannot have multiple spaces."
-                                      );
-                                    } else if (value.length >= 50) {
-                                      setError("Value cannot exceed 50 characters");
-                                    } else if (value.trim() === "") {
-                                      setError("Please enter full name.");
-                                    } else if (value.length < 3) {
-                                      setError(
-                                        "Full name must be at least 3 characters long"
-                                      );
-                                    } else {
-                                      setError("");
-                                    }
+                    setName(value);
+                  }}
+                />
 
-                                    setName(value);
-                                  }}
-                                />
-
-                                {error && (
-                                  <div style={{ color: "red", fontSize: "14px" }}>
-                                    {error}
-                                  </div>
-                                )}
-                              </Form.Group>
-                            </Col>
-
-                            {/* Email */}
-                            <Col md={6}>
-                              <Form.Group
-                                controlId="formGridEmail"
-                                className="comn-class-inputs"
-                              >
-                                <Form.Label>Email Address</Form.Label>
-
-                                <Form.Control
-                                  type="email"
-                                  placeholder="Enter Your Email Address"
-                                  defaultValue={userDetail?.email}
-                                  disabled
-                                />
-                              </Form.Group>
-                            </Col>
-                          </Row>
-
-                          {/* Buttons */}
-                          <div className="pair-btns-comn d-flex align-items-center gap-3 mt-3">
-                            <Button className="comn-btn-pair" onClick={updateProfile}>
-                              Update Profile
-                            </Button>
-
-                            <Button
-                              className="comn-btn-pair back-white-btn"
-                              onClick={() => router.push("/profile")}
-                            >
-                              Discard
-                            </Button>
-                          </div>
-                        </Form>
-                      </div>
-                    </div>
-                  </section>
-                </div>
+                {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
               </div>
-            </section>
+
+              {/* Email */}
+              <div>
+                <label className="block text-sm font-medium mb-1">
+                  Email Address
+                </label>
+
+                <input
+                  type="email"
+                  disabled
+                  defaultValue={userDetail?.email}
+                  className="w-full border rounded-md px-4 py-2 bg-gray-100 cursor-not-allowed"
+                />
+              </div>
+            </div>
+
+            {/* Buttons */}
+            <div className="flex gap-4 mt-6">
+              <button
+                onClick={updateProfile}
+                className="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 transition"
+              >
+                Update Profile
+              </button>
+
+              <button
+                onClick={() => router.push("/profile")}
+                className="border border-gray-300 px-6 py-2 rounded-md hover:bg-gray-100 transition"
+              >
+                Discard
+              </button>
+            </div>
           </div>
         </div>
       </div>
