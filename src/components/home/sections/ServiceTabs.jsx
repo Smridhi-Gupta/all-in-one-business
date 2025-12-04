@@ -32,11 +32,7 @@ const ServiceTabs = () => {
       name: "PPC Advertising",
       title: "PPC Advertising",
       desc: "We design cost-effective PPC campaigns to drive targeted traffic and measurable results, ensuring every click contributes to your business growth.",
-      points: [
-        "Google Ads Management",
-        "Keyword Targeting",
-        "ROI Optimization",
-      ],
+      points: ["Google Ads Management", "Keyword Targeting", "ROI Optimization"],
       image: "/Home-s1.png",
     },
     {
@@ -80,7 +76,7 @@ const ServiceTabs = () => {
 
   return (
     <section className="relative w-full min-h-[80vh] bg-[#031225] text-white overflow-hidden py-20 px-6 flex flex-col items-center justify-center">
-      {/* ===== Background Animation Layer ===== */}
+      {/* Background Animation */}
       <div className="absolute inset-0">
         <Image
           src="/bg-anim.png"
@@ -90,24 +86,25 @@ const ServiceTabs = () => {
         />
       </div>
 
-      {/* ===== Tabs ===== */}
+      {/* Tabs */}
       <div className="relative z-10 flex flex-wrap justify-center gap-4 mb-14">
         {tabs.map((tab) => (
           <button
             key={tab.name}
             onClick={() => setActiveTab(tab.name)}
-            className={`px-5 py-2 rounded-full border transition-all duration-300 text-sm font-medium ${
-              activeTab === tab.name
-                ? "bg-[#FF5100] text-white border-[#FF5100] shadow-md"
-                : "bg-white text-[#031225] border-gray-200 hover:bg-gray-100"
-            }`}
+            className={`px-6 py-2 rounded-full border transition-all duration-300 text-base font-semibold cursor-pointer
+              ${
+                activeTab === tab.name
+                  ? "bg-[#FF5100] text-white border-white"
+                  : "bg-white text-black border-[#FF5100] hover:bg-[#FF5100] hover:text-white hover:border-white"
+              }`}
           >
             {tab.name}
           </button>
         ))}
       </div>
 
-      {/* ===== Active Tab Content ===== */}
+      {/* Content */}
       <div className="relative z-10 max-w-6xl mx-auto grid md:grid-cols-2 gap-10 items-center">
         {/* Left Image */}
         <motion.div
@@ -127,7 +124,7 @@ const ServiceTabs = () => {
           />
         </motion.div>
 
-        {/* Right Text Content */}
+        {/* Right Content */}
         <AnimatePresence mode="wait">
           <motion.div
             key={current.name}
@@ -137,24 +134,24 @@ const ServiceTabs = () => {
             transition={{ duration: 0.5 }}
             className="flex flex-col"
           >
-            <h2 className="text-2xl md:text-3xl font-semibold text-[#60A5FA] mb-4">
+            <h2 className="text-3xl font-bold text-[#60A5FA] mb-4">
               {current.title}
             </h2>
-            <p className="text-gray-300 text-sm md:text-base mb-6 leading-relaxed">
+
+            <p className="text-gray-400 text-base mb-6 leading-relaxed">
               {current.desc}
             </p>
+
             <ul className="mb-6 space-y-2">
               {current.points.map((point, i) => (
-                <li
-                  key={i}
-                  className="flex items-center gap-2 text-sm text-gray-200"
-                >
-                  <span className="text-green-400">✔</span>
-                  {point}
+                <li key={i} className="flex items-center gap-2 text-base">
+                  <span className="text-green-400 text-lg">✔</span>
+                  <span className="text-blue-300 font-sm">{point}</span>
                 </li>
               ))}
             </ul>
-            <button className="self-start bg-[#22C55E] hover:bg-green-500 text-white px-6 py-2 rounded-full text-sm font-medium transition-all">
+
+            <button className="self-start bg-green-400 cursor-pointer text-blue-500 px-7 py-2 rounded-full text-base font-semibold transition-all">
               Explore more
             </button>
           </motion.div>

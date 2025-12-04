@@ -7,7 +7,7 @@ import { ChevronDown, Search, User } from "lucide-react";
 
 const Header = () => {
   return (
-    <header className="w-full bg-white shadow-sm fixed top-0 z-50">
+    <header className="w-full bg-white shadow-sm fixed z-50">
       <div className="max-w-7xl mx-auto flex items-center justify-between px-8">
         {/* LOGO */}
         <Link href="/">
@@ -15,7 +15,7 @@ const Header = () => {
             src="/Logo.png"
             alt="Company Logo"
             width={120}
-            height={34}
+            height={14}
             className="cursor-pointer object-contain"
           />
         </Link>

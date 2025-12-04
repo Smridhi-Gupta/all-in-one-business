@@ -34,7 +34,7 @@ const Services = () => {
   ];
 
   return (
-    <section className="relative w-full bg-white overflow-hidden py-20">
+    <section className="relative w-full bg-white overflow-hidden py-10">
       {/* ===== Trusted by Brands Section ===== */}
       <div className="flex flex-col items-center mb-20">
         <p className="text-base font-bold text-gray-700 mb-6">
@@ -58,34 +58,35 @@ const Services = () => {
           </div>
 
           {/* Orange Underbar (Overlapping) */}
-          <div className="absolute bottom-[-8px] left-1/2 -translate-x-1/2 w-[92%] h-[14px] bg-[#FF5100] rounded-2xl z-0"></div>
+          <div className="absolute bottom-[-22px] left-1/2 -translate-x-1/2 w-[92%] h-[100px] bg-[#FF5100] rounded-2xl z-0"></div>
         </div>
       </div>
 
       {/* ===== Infinity Background ===== */}
-      <div className="absolute inset-0 flex justify-center items-center">
+      <div className="absolute inset-0 flex justify-center items-center translate-y-15">
         <Image
           src="/infinity.png"
           alt="infinity background"
-          width={950}
-          height={950}
+          width={1350}
+          height={1500}
           className="object-cover opacity-100 saturate-150"
         />
       </div>
 
       {/* ===== Section Header ===== */}
       <div className="relative z-10 max-w-6xl mx-auto px-6">
-        <span className="inline-flex items-center bg-[#FF5100]/10 border border-[#FF5100]/30 text-[#FF5100] text-xs font-medium px-3 py-1 rounded-full mb-4">
-          ● Services
+        <span className="inline-flex items-center gap-2 bg-white border border-gray-400 font-medium px-2 py-0.5 rounded-full">
+          <span className="w-2 h-2 rounded-full bg-[#FF5100]"></span>
+          Services
         </span>
 
         <div className="flex flex-col md:flex-row md:items-end md:justify-between mb-14">
           <div>
-            <h2 className="text-3xl md:text-4xl font-semibold text-[#031225] mb-3">
+            <h2 className="text-3xl md:text-4xl font-bold text-[#031225] mb-3">
               Comprehensive Digital <br /> Marketing Services
             </h2>
           </div>
-          <div className="mt-4 md:mt-0 max-w-md text-gray-600 text-sm leading-relaxed">
+          <div className="mt-4 md:mt-0 max-w-md text-gray-500 text-sm leading-relaxed">
             Tailored Solutions for Your Business Growth. Discover expert digital
             marketing solutions designed for performance and impact.
             <br />
@@ -112,16 +113,16 @@ const Services = () => {
               key={index}
               whileHover={{ y: -8, scale: 1.02 }}
               transition={{ duration: 0.3 }}
-              className={`relative w-full h-[330px] rounded-2xl ${
+              className={`relative w-full h-[420px] rounded-2xl ${
                 service.dark
                   ? "bg-[#031225] text-white"
                   : "bg-white text-[#031225]"
               } shadow-[0_8px_25px_rgba(0,0,0,0.15)] p-6 flex flex-col justify-between transition-all ${marginClass}`}
             >
               <div>
-                <h3 className="text-2xl font-bold mb-2">{service.title}</h3>
+                <h3 className="text-3xl font-bold mb-4">{service.title}</h3>
                 <p
-                  className={`text-sm ${
+                  className={`text-md ${
                     service.dark ? "text-gray-300" : "text-gray-600"
                   } mb-6`}
                 >
@@ -129,7 +130,7 @@ const Services = () => {
                 </p>
 
                 {/* Learn More Button */}
-                <button className="inline-flex items-center gap-2 bg-[#FF5100] text-white px-4 py-2 rounded-full text-xs font-medium hover:bg-orange-500 transition-all">
+                <button className="inline-flex items-center gap-2 bg-[#FF5100] text-white px-7 py-1.5 rounded-full text-sm font-medium hover:bg-orange-500 transition-all">
                   Learn more <span className="text-base font-bold">»</span>
                 </button>
               </div>
