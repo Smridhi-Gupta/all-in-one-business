@@ -30,16 +30,15 @@ const PlatformIndustrySection = () => {
       </div>
 
       {/* ===== Marketing Services Row ===== */}
-      <div className="max-w-6xl mx-auto px-8 md:px-20 flex flex-col md:flex-row md:items-center md:justify-between mb-10 text-left gap-10">
-        
-        {/* Left Content with Equal Width */}
-        <div className="w-full md:w-1/2 max-w-l">
+      <div className="max-w-5xl mx-auto px-8 md:px-20 flex flex-col md:flex-row md:items-center md:justify-between mb-10 text-left gap-10">
+        {/* Left Content */}
+        <div className="w-full md:w-1/2">
           <h3 className="text-3xl md:text-4xl font-bold text-[#031225] leading-tight mb-3">
             Comprehensive Digital <br /> Marketing Services
           </h3>
 
-          <p className="text-gray-500 text-sm md:text-base max-w-md leading-relaxed">
-            Tailored Solutions for Your Business Growth. Tailored Solutions for 
+          <p className="text-gray-500 text-sm md:text-base leading-relaxed max-w-md">
+            Tailored Solutions for Your Business Growth. Tailored Solutions for
             Your Business Growth. Tailored Solutions for Your Business Growth.
           </p>
         </div>
@@ -54,8 +53,7 @@ const PlatformIndustrySection = () => {
 
       {/* ===== Testimonial Section ===== */}
       <div className="flex justify-center">
-        <div className="relative w-[90%] md:w-[70%] lg:w-[60%] rounded-2xl overflow-hidden shadow-lg">
-
+        <div className="relative max-w-5xl w-full mx-auto rounded-2xl overflow-hidden shadow-lg">
           {/* Background Image */}
           <Image
             src="/blog-1.jpg"
@@ -68,7 +66,6 @@ const PlatformIndustrySection = () => {
 
           {/* Overlay */}
           <div className="absolute inset-0 bg-black/50 flex flex-col justify-center items-center px-6 text-center">
-
             {/* Star Rating */}
             <div className="flex justify-center mb-3">
               {Array(5)
