@@ -28,22 +28,22 @@ const stats = [
 
 const StatsSection = () => {
   return (
-    <section className="w-full bg-[#e8f3ff] py-8 px-6 md:px-10">
+    <section className="w-full bg-[#f1f5fc] py-8 px-6 md:px-10">
       <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 text-center">
         {stats.map((item, i) => (
           <div key={i} className="flex flex-col items-center justify-center">
             {/* Icon Background */}
-            <div className="w-14 h-20 rounded-full bg-white shadow-lg flex items-center justify-center mb-4">
+            <div className="w-18 h-22 rounded-full bg-white shadow-lg flex items-center justify-center mb-4">
               <span className="text-[#031225]">{item.icon}</span>
             </div>
 
             {/* Value */}
-            <h3 className="text-[#031225] font-bold text-lg mb-1">
+            <h3 className="text-[#031225] font-bold text-2xl mb-1">
               {item.value}
             </h3>
 
             {/* Label */}
-            <p className="text-gray-500 text-sm">{item.label}</p>
+            <p className="text-gray-500 text-sm font-semibold">{item.label}</p>
           </div>
         ))}
       </div>

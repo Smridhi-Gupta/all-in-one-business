@@ -6,7 +6,7 @@ import Image from "next/image";
 const NewsletterSection = () => {
   return (
     <section className="w-full flex justify-center py-20 px-6">
-      <div className="max-w-6xl w-full bg-gradient-to-r from-[#031225] via-[#081b33] to-[#0b254d] rounded-3xl p-10 md:p-16 flex flex-col md:flex-row items-center justify-between relative overflow-hidden shadow-[0_8px_30px_rgba(0,0,0,0.2)]">
+      <div className="max-w-6xl w-full bg-linear-to-r from-[#031225] via-[#081b33] to-[#0b254d] rounded-3xl p-10 md:p-16 flex flex-col md:flex-row items-center justify-between relative overflow-hidden shadow-[0_8px_30px_rgba(0,0,0,0.2)]">
         {/* Left Content */}
         <div className="text-white max-w-lg space-y-4 z-10">
           <h2 className="text-2xl md:text-3xl font-bold">
