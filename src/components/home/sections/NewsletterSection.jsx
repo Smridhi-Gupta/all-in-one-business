@@ -6,18 +6,18 @@ import Image from "next/image";
 const NewsletterSection = () => {
   return (
     <section className="w-full flex justify-center py-20 px-6">
-      <div className="max-w-6xl w-full bg-linear-to-r from-[#031225] via-[#081b33] to-[#0b254d] rounded-3xl p-10 md:p-16 flex flex-col md:flex-row items-center justify-between relative overflow-hidden shadow-[0_8px_30px_rgba(0,0,0,0.2)]">
+      <div className="max-w-6xl w-full h-80 bg-linear-to-r from-[#031225] via-[#081b33] to-[#0b254d] rounded-3xl p-10 md:p-16 flex flex-col md:flex-row items-center justify-between relative overflow-hidden shadow-[0_8px_30px_rgba(0,0,0,0.2)]">
         {/* Left Content */}
         <div className="text-white max-w-lg space-y-4 z-10">
           <h2 className="text-2xl md:text-3xl font-bold">
             Subscribe our newsletter
           </h2>
-          <p className="text-gray-300 text-sm leading-relaxed">
+          <p className="text-sm leading-relaxed">
             We’ll send you curated content, proven tactics, and updates that
             help your brand grow. Join our list and stay in the loop.
           </p>
 
-          <button className="mt-4 px-6 py-3 bg-[#FF5100] hover:bg-orange-500 text-white rounded-full text-sm font-medium transition-all shadow-lg">
+          <button className="mt-4 px-8 py-1.5 bg-[#FF5100] text-white rounded-full text-lg font-medium transition-all shadow-lg">
             Let’s contact us
           </button>
         </div>
