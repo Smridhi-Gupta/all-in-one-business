@@ -51,7 +51,6 @@ const Header = () => {
           <Link href="/" className="hover:text-[#FF5100]">
             Home
           </Link>
-
           {/* ================= SERVICES SIDEBAR + MEGA MENU ================= */}
           <div className="relative" onMouseEnter={() => setShowServices(true)}>
             <div className="flex items-center gap-1 cursor-pointer">
@@ -104,17 +103,43 @@ const Header = () => {
               </div>
             )}
           </div>
-
-          {/* INDUSTRIES */}
-          <Link href="/industries" className="hover:text-[#FF5100]">
-            Industries
-          </Link>
-
+          {/* ================= INDUSTRIES DROPDOWN ================= */}{" "}
+          <div className="relative group">
+            {" "}
+            <div className="flex items-center gap-1 cursor-pointer hover:text-[#FF5100]">
+              {" "}
+              <span>Industries</span> <ChevronDown size={15} />{" "}
+            </div>{" "}
+            <div className="hidden group-hover:block absolute top-[42px] left-0 w-[260px] bg-[#fafafa] shadow-md border border-[#e5e5e5] z-50">
+              {" "}
+              <ul className="text-[15px] text-[#031225]">
+                {" "}
+                {[
+                  "Accounting Firm Industry",
+                  "Cleaning Industry",
+                  "Cyber Security Industry",
+                  "Healthcare Industry",
+                  "Home Services Industry",
+                  "Immigration Firm Industry",
+                  "IT Industry",
+                  "Law Industry",
+                  "Retail Industry",
+                ].map((item, i) => (
+                  <li
+                    key={i}
+                    className="px-5 py-3 border-b border-gray-200 hover:bg-gray-100 hover:text-[#FF5100] cursor-pointer transition"
+                  >
+                    {" "}
+                    {item}{" "}
+                  </li>
+                ))}{" "}
+              </ul>{" "}
+            </div>{" "}
+          </div>
           {/* ABOUT */}
           <Link href="/about" className="hover:text-[#FF5100]">
             About Us
           </Link>
-
           {/* CONTACT */}
           <Link href="/contact" className="hover:text-[#FF5100]">
             Contact Us
