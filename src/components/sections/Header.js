@@ -16,22 +16,64 @@ const categories = [
 ];
 
 const subCategories = {
-  IT: [
-    "Digital Marketing",
-    "Web Design",
-    "Social Media",
-    "SEO",
-    "PPC",
-    "DA & AI",
-    "Development",
-    "Graphic Designing",
-  ],
-  Immigration: ["Dummy Immigration Service"],
-  Accounting: ["Dummy Accounting Service"],
-  DocumentEvaluation: ["Dummy Document Evaluation"],
-  Judiciary: ["Dummy Judiciary Service"],
-  Staffing: ["Dummy Staffing Service"],
-  CorporateTraining: ["Dummy Corporate Training"],
+  IT: {
+    "Digital Marketing": [
+      "Franchise Digital Marketing",
+      "Digital Marketing Strategy Development",
+      "Enterprise Digital Marketing",
+    ],
+    "Web Design": [
+      "Custom Website Design",
+      "WordPress Web Design",
+      "eCommerce Web Design",
+    ],
+    "Social Media": [
+      "Social Media Management",
+      "Franchise Social Media",
+      "Enterprise Social Media",
+    ],
+    SEO: [
+      "Local SEO",
+      "Technical SEO",
+      "AI SEO Services",
+      "Franchise SEO",
+      "Enterprise SEO",
+      "SEO Audit",
+    ],
+    PPC: [
+      "Search Engine Marketing",
+      "Google Ads Management",
+      "Lead Generation Services",
+    ],
+    "DA & AI": ["CRM", "Web Scrapping", "Chatbot"],
+    Development: [
+      "WordPress",
+      "Full Stack Websites",
+      "Hosting & Domain",
+      "Security",
+    ],
+    "Graphic Design": [],
+    "Immigration Services": [],
+  },
+
+  Immigration: {
+    "Dummy Immigration Service": [],
+  },
+  Accounting: {
+    "Dummy Accounting Service": [],
+  },
+  DocumentEvaluation: {
+    "Dummy Document Evaluation": [],
+  },
+  Judiciary: {
+    "Dummy Judiciary Service": [],
+  },
+  Staffing: {
+    "Dummy Staffing Service": [],
+  },
+  CorporateTraining: {
+    "Dummy Corporate Training": [],
+  },
 };
 
 const Header = () => {
@@ -62,7 +104,7 @@ const Header = () => {
             {showServices && (
               <div
                 className="
-        fixed left-0 top-[85px] w-screen h-[520px]
+        fixed left-0 top-[85px] w-screen h-screen
         bg-white border-t border-gray-200
         flex z-9999
       "
@@ -74,7 +116,7 @@ const Header = () => {
                     <div
                       key={i}
                       onMouseEnter={() => setActiveCategory(item)}
-                      className={`px-4 py-3 rounded-lg cursor-pointer transition 
+                      className={`px-4 py-3 rounded-lg cursor-pointer transition text-md font-bold
               ${
                 activeCategory === item
                   ? "bg-white font-bold text-[#031225]"
@@ -88,23 +130,39 @@ const Header = () => {
 
                 {/* ===== RIGHT MEGA MENU ===== */}
                 <div className="flex-1 px-20 py-12 grid grid-cols-3 gap-14 overflow-y-auto">
-                  {(subCategories[activeCategory] || []).map((sub, i) => (
-                    <Link
-                      key={i}
-                      href="/subservices"
-                      className="
-              text-[#031225] hover:text-[#FF5100] 
-              font-medium text-[16px] transition
-            "
-                    >
-                      → {sub}
-                    </Link>
-                  ))}
+                  {subCategories[activeCategory] &&
+                    Object.entries(subCategories[activeCategory]).map(
+                      ([heading, items], i) => (
+                        <div key={i}>
+                          {/* HEADING */}
+                          <h4 className="font-bold text-2xl text-[#031225] mb-4 flex items-center gap-2">
+                            <span className="w-3 h-3 bg-[#FF5100] rounded-full"></span>
+                            {heading}
+                          </h4>
+
+                          {/* LIST */}
+                          {items.length > 0 && (
+                            <ul className="space-y-2">
+                              {items.map((item, j) => (
+                                <li key={j}>
+                                  <Link
+                                    href="/subservices"
+                                    className="text-[#555] hover:text-[#FF5100] text-md transition"
+                                  >
+                                    {item}
+                                  </Link>
+                                </li>
+                              ))}
+                            </ul>
+                          )}
+                        </div>
+                      )
+                    )}
                 </div>
               </div>
             )}
           </div>
-          {/* ================= INDUSTRIES DROPDOWN (FIXED) ================= */}
+          {/* ================= INDUSTRIES DROPDOWN (WORKING LIKE SERVICES) ================= */}
           <div
             className="relative"
             onMouseEnter={() => setShowIndustries(true)}
@@ -122,7 +180,7 @@ const Header = () => {
                 className="
         absolute top-[42px] left-0 w-[260px]
         bg-[#fafafa] shadow-md border border-[#e5e5e5]
-        z-[9999]
+        z-9999
       "
               >
                 <ul className="text-[15px] text-[#031225]">
