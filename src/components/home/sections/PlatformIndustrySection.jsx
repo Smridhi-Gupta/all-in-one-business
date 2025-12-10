@@ -5,7 +5,16 @@ import Image from "next/image";
 import { ExternalLink } from "lucide-react";
 
 const PlatformIndustrySection = () => {
-  const exploreButtons = Array(9).fill("Explore more");
+  // ✅ Updated Button Text
+  const exploreButtons = [
+    "IT",
+    "Immigration",
+    "Accounting",
+    "Document Evaluation",
+    "Judiciary",
+    "Staffing",
+    "Corporate Training",
+  ];
 
   return (
     <section className="w-full bg-white py-20 text-center">
@@ -19,11 +28,11 @@ const PlatformIndustrySection = () => {
         {exploreButtons.map((text, i) => (
           <button
             key={i}
-            className="flex items-center gap-2 px-6 py-3 rounded-full border border-[#031225] 
+            className="flex items-center gap-2 px-6 py-3 rounded-full border border-[#031225]
             text-[#FF5100]
-            transition-all duration-300 text-sm font-semibold"
+            transition-all duration-300 text-sm font-semibold hover:bg-[#FF5100] hover:text-white"
           >
-            <ExternalLink size={14} className="text-[#FF5100]" />
+            <ExternalLink size={14} />
             {text}
           </button>
         ))}
@@ -95,7 +104,7 @@ const PlatformIndustrySection = () => {
         </div>
       </div>
 
-      {/* Pagination Dots */}
+      {/* ===== Pagination Dots ===== */}
       <div className="flex justify-center gap-2 mt-5">
         <span className="w-2.5 h-2.5 bg-[#FF5100] rounded-full"></span>
         <span className="w-2.5 h-2.5 bg-gray-300 rounded-full"></span>
