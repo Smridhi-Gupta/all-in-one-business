@@ -1,41 +1,30 @@
+import React from "react";
 import Link from "next/link";
+import { ChevronRight } from "lucide-react";
 
-export default function Hero() {
+const Hero = () => {
   return (
-    <section className="bg-[#031225] text-white py-28 px-6 md:px-20">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-        {/* Left Content */}
-        <div>
-          <h1 className="text-4xl md:text-5xl font-extrabold leading-snug text-[#FF5100]">
-            Discover how the world <br /> works with ServiceNow
-          </h1>
-          <p className="mt-6 text-lg md:text-xl text-gray-300 max-w-lg">
-            We help organizations of every size, in every industry, put AI to
-            work for people.
-          </p>
+    <section className="w-full bg-[#031225] text-white pt-36 pb-20 md:pt-44 md:pb-28 text-center">
+      <div className="max-w-4xl mx-auto px-4">
+        <h1 className="text-4xl md:text-5xl font-bold mb-6">About Us</h1>
 
-          {/* Buttons */}
-          <div className="mt-8 flex flex-wrap gap-4">
-            <Link
-              href="#"
-              className="bg-[#FF5100] text-white font-semibold px-6 py-3 rounded-full hover:bg-[#e14a00] transition"
-            >
-              Get Started
-            </Link>
-            <Link
-              href="#"
-              className="border border-[#FF5100] text-[#FF5100] px-6 py-3 rounded-full hover:bg-[#FF5100] hover:text-white transition"
-            >
-              Learn More
-            </Link>
-          </div>
-        </div>
+        <p className="text-sm md:text-base leading-relaxed font-normal">
+          We take pride in delivering customised solutions that reflect your
+          business targets and transform business challenges into success
+          opportunities through our dedicated effort toward results-driven
+          customer satisfaction.
+        </p>
 
-        {/* Right Grey Placeholder */}
-        <div className="flex justify-center md:justify-end">
-          <div className="w-100 md:w-[36rem] h-96 md:h-[32rem] bg-gray-700 rounded-2xl flex items-center justify-center"></div>
+        <div className="flex justify-center items-center gap-2 mt-10 text-sm md:text-base opacity-90">
+          <Link href="/" className="hover:text-[#FF5100] transition">
+            Home
+          </Link>
+          <ChevronRight size={16} />
+          <span className="text-[#FF5100]">About Us</span>
         </div>
       </div>
     </section>
   );
-}
+};
+
+export default Hero;

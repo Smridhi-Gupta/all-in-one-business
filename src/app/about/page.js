@@ -1,16 +1,18 @@
 import Hero from '@/components/about/sections/Hero'
-import Impact from '@/components/about/sections/Impact'
-import Innovations from '@/components/about/sections/Innovations'
-import Resources from '@/components/about/sections/Resources'
+import MissionVision from '@/components/about/sections/MissionVision'
+import FAQSection from '@/components/home/sections/FAQSection'
+import CTASection from '@/components/service/CTASection'
+import WhyChooseUs from '@/components/service/WhyChooseUs'
 import React from 'react'
 
 const page = () => {
   return (
     <div>
-       <Hero /> 
-       <Innovations />
-       <Impact />
-       <Resources />
+       <Hero />
+       <MissionVision />
+       <WhyChooseUs />
+       <CTASection />
+       <FAQSection />
     </div>
   )
 }

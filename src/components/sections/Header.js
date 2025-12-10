@@ -126,7 +126,7 @@ const Header = () => {
                 </div>
 
                 {/* ===== RIGHT MEGA MENU ===== */}
-                <div className="flex-1 px-20 py-8 grid grid-cols-3 gap-6 overflow-y-auto">
+                <div className="flex-1 px-20 py-8 grid grid-cols-3 gap-6 overflow-y-auto grid-flow-row-dense">
                   {subCategories[activeCategory] &&
                     Object.entries(subCategories[activeCategory]).map(
                       ([heading, items], i) => (
