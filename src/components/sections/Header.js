@@ -22,10 +22,14 @@ const subCategories = {
       "Digital Marketing Strategy Development",
       "Enterprise Digital Marketing",
     ],
-    "Web Design": [
+    "Web Design & Development": [
       "Custom Website Design",
       "WordPress Web Design",
       "eCommerce Web Design",
+      "WordPress",
+      "Full Stack Websites",
+      "Hosting & Domain",
+      "Security",
     ],
     "Social Media": [
       "Social Media Management",
@@ -46,18 +50,11 @@ const subCategories = {
       "Lead Generation Services",
     ],
     "DA & AI": ["CRM", "Web Scrapping", "Chatbot"],
-    Development: [
-      "WordPress",
-      "Full Stack Websites",
-      "Hosting & Domain",
-      "Security",
-    ],
     "Graphic Design": [],
-    "Immigration Services": [],
   },
 
   Immigration: {
-    "Dummy Immigration Service": [],
+    Immigration: ["H1-B", "Change of Status"],
   },
   Accounting: {
     "Dummy Accounting Service": [],
@@ -129,25 +126,28 @@ const Header = () => {
                 </div>
 
                 {/* ===== RIGHT MEGA MENU ===== */}
-                <div className="flex-1 px-20 py-12 grid grid-cols-3 gap-14 overflow-y-auto">
+                <div className="flex-1 px-20 py-8 grid grid-cols-3 gap-6 overflow-y-auto">
                   {subCategories[activeCategory] &&
                     Object.entries(subCategories[activeCategory]).map(
                       ([heading, items], i) => (
                         <div key={i}>
                           {/* HEADING */}
-                          <h4 className="font-bold text-2xl text-[#031225] mb-4 flex items-center gap-2">
+                          <Link
+                            href={`/service`}
+                            className="font-bold text-md text-[#031225] mb-4 flex items-center gap-2 hover:text-[#FF5100] transition"
+                          >
                             <span className="w-3 h-3 bg-[#FF5100] rounded-full"></span>
                             {heading}
-                          </h4>
+                          </Link>
 
                           {/* LIST */}
                           {items.length > 0 && (
-                            <ul className="space-y-2">
+                            <ul className="space-y-1">
                               {items.map((item, j) => (
                                 <li key={j}>
                                   <Link
-                                    href="/subservices"
-                                    className="text-[#555] hover:text-[#FF5100] text-md transition"
+                                    href=""
+                                    className="text-[#555] hover:text-[#FF5100] text-sm transition"
                                   >
                                     {item}
                                   </Link>
