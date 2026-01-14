@@ -3,9 +3,15 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ChevronDown, Search } from "lucide-react";
+import {
+  ChevronDown,
+  Search,
+  Menu,
+  X,
+} from "lucide-react";
 import { usePathname } from "next/navigation";
 
+/* ================= DATA ================= */
 const categories = [
   "IT",
   "Immigration",
@@ -55,8 +61,12 @@ const subCategories = {
   },
 
   Immigration: {
-    Immigration: ["H1-B", "Change of Status"],
+    Immigration: [
+      { label: "H1-B", link: "/h1B" },
+      { label: "Change of Status", link: "/change-of-status" },
+    ],
   },
+
   Accounting: {
     "Dummy Accounting Service": [],
   },
@@ -75,153 +85,198 @@ const subCategories = {
 };
 
 const Header = () => {
+  const pathname = usePathname();
+
   const [activeCategory, setActiveCategory] = useState("IT");
   const [showServices, setShowServices] = useState(false);
   const [showIndustries, setShowIndustries] = useState(false);
 
-  const pathname = usePathname();
+  /* Mobile states */
+  const [mobileMenu, setMobileMenu] = useState(false);
+  const [mobileCategory, setMobileCategory] = useState(null);
+  const [mobileSub, setMobileSub] = useState(null);
 
-  // ✅ Close menus on route change
+  /* Close menus on route change */
   useEffect(() => {
     setShowServices(false);
     setShowIndustries(false);
+    setMobileMenu(false);
   }, [pathname]);
 
   return (
-    <header className="w-full bg-white shadow-sm fixed z-50">
-      <div className="max-w-7xl mx-auto flex items-center justify-between px-8 h-[72px]">
+    <header className="fixed w-full bg-white shadow-sm z-50">
+      <div className="max-w-7xl mx-auto h-[72px] flex items-center justify-between px-6">
         {/* LOGO */}
         <Link href="/">
-          <Image src="/Logo.png" alt="Company Logo" width={80} height={20} />
+          <Image src="/Logo.png" alt="Logo" width={80} height={20} />
         </Link>
 
-        {/* NAV */}
+        {/* DESKTOP NAV */}
         <nav className="hidden md:flex items-center gap-8 text-[#031225] font-medium text-[15px]">
-          <Link href="/" className="hover:text-[#FF5100]">Home</Link>
+          <Link href="/">Home</Link>
 
-          {/* SERVICES */}
+          {/* SERVICES DESKTOP */}
           <div className="relative" onMouseEnter={() => setShowServices(true)}>
             <div className="flex items-center gap-1 cursor-pointer">
-              <span className="hover:text-[#FF5100]">Services</span>
-              <ChevronDown size={15} />
+              <span>Services</span>
+              <ChevronDown size={14} />
             </div>
 
             {showServices && (
               <div
-                className="
-                  fixed left-0 top-[72px]
-                  w-screen h-[60vh]
-                  bg-white border-t border-gray-200
-                  flex z-9999
-                "
+                className="fixed left-0 top-[72px] w-screen h-[60vh] bg-white border-t flex z-50"
                 onMouseLeave={() => setShowServices(false)}
               >
-                {/* LEFT SIDEBAR */}
+                {/* LEFT */}
                 <div className="w-[300px] bg-[#f3f3f3] p-4 space-y-2 overflow-y-auto">
-                  {categories.map((item, i) => (
+                  {categories.map((cat) => (
                     <div
-                      key={i}
-                      onMouseEnter={() => setActiveCategory(item)}
-                      className={`px-4 py-2 rounded-md cursor-pointer transition font-bold
-                        ${
-                          activeCategory === item
-                            ? "bg-white text-[#031225]"
-                            : "hover:bg-white"
-                        }`}
+                      key={cat}
+                      onMouseEnter={() => setActiveCategory(cat)}
+                      className={`px-4 py-2 rounded-md font-bold cursor-pointer ${
+                        activeCategory === cat
+                          ? "bg-white"
+                          : "hover:bg-white"
+                      }`}
                     >
-                      {item}
+                      {cat}
                     </div>
                   ))}
                 </div>
 
-                {/* RIGHT CONTENT */}
+                {/* RIGHT */}
                 <div className="flex-1 px-12 py-6 grid grid-cols-3 gap-4 overflow-y-auto">
-                  {subCategories[activeCategory] &&
-                    Object.entries(subCategories[activeCategory]).map(
-                      ([heading, items], i) => (
-                        <div key={i}>
-                          <Link
-                            href="/service"
-                            className="font-bold text-md text-[#031225] mb-2 flex items-center gap-2 hover:text-[#FF5100]"
-                          >
-                            <span className="w-3 h-3 bg-[#FF5100] rounded-full"></span>
-                            {heading}
-                          </Link>
+                  {Object.entries(subCategories[activeCategory] || {}).map(
+                    ([heading, items]) => (
+                      <div key={heading}>
+                        <Link
+                          href="/service"
+                          className="font-bold mb-2 flex gap-2 hover:text-[#FF5100]"
+                        >
+                          <span className="w-3 h-3 bg-[#FF5100] rounded-full" />
+                          {heading}
+                        </Link>
 
-                          {items.length > 0 && (
-                            <ul className="space-y-0.5">
-                              {items.map((item, j) => (
-                                <li key={j}>
-                                  <Link
-                                    href=""
-                                    className="text-[#555] hover:text-[#FF5100] text-sm"
-                                  >
-                                    {item}
-                                  </Link>
-                                </li>
-                              ))}
-                            </ul>
+                        <ul className="space-y-0.5">
+                          {items.map((item, i) =>
+                            typeof item === "string" ? (
+                              <li key={i} className="text-sm text-gray-600">
+                                {item}
+                              </li>
+                            ) : (
+                              <li key={i}>
+                                <Link
+                                  href={item.link}
+                                  className="text-sm text-gray-600 hover:text-[#FF5100]"
+                                >
+                                  {item.label}
+                                </Link>
+                              </li>
+                            )
                           )}
-                        </div>
-                      )
-                    )}
+                        </ul>
+                      </div>
+                    )
+                  )}
                 </div>
               </div>
             )}
           </div>
 
-          {/* INDUSTRIES */}
-          <div
-            className="relative"
-            onMouseEnter={() => setShowIndustries(true)}
-            onMouseLeave={() => setShowIndustries(false)}
-          >
-            <div className="flex items-center gap-1 cursor-pointer hover:text-[#FF5100]">
-              <span>Industries</span>
-              <ChevronDown size={15} />
-            </div>
-
-            {showIndustries && (
-              <div className="absolute top-[42px] left-0 w-[260px] bg-[#fafafa] shadow-md border z-9999">
-                <ul>
-                  {[
-                    "Accounting Firm Industry",
-                    "Cleaning Industry",
-                    "Cyber Security Industry",
-                    "Healthcare Industry",
-                    "Home Services Industry",
-                    "Immigration Firm Industry",
-                    "IT Industry",
-                    "Law Industry",
-                    "Retail Industry",
-                  ].map((item, i) => (
-                    <li
-                      key={i}
-                      className="px-5 py-3 border-b hover:bg-gray-100 hover:text-[#FF5100]"
-                    >
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
-          </div>
-
-          <Link href="/about" className="hover:text-[#FF5100]">About Us</Link>
-          <Link href="/contact" className="hover:text-[#FF5100]">Contact Us</Link>
+          <Link href="/about">About Us</Link>
+          <Link href="/contact">Contact Us</Link>
         </nav>
 
         {/* RIGHT */}
         <div className="flex items-center gap-4">
-          <Search size={18} className="cursor-pointer hover:text-[#FF5100]" />
-          <Link
-            href="/login"
-            className="text-sm px-4 py-1.5 border rounded-md hover:bg-gray-100"
-          >
+          <Search size={18} />
+          <Link href="/login" className="hidden md:block border px-4 py-1.5 rounded-md">
             Login
           </Link>
+
+          {/* MOBILE BURGER */}
+          <button
+            className="md:hidden"
+            onClick={() => setMobileMenu(true)}
+          >
+            <Menu size={26} />
+          </button>
         </div>
       </div>
+
+      {/* ================= MOBILE MENU ================= */}
+      {mobileMenu && (
+        <div className="fixed inset-0 bg-white z-9999 overflow-y-auto">
+          <div className="flex justify-between items-center px-6 h-[72px] border-b">
+            <Image src="/Logo.png" alt="Logo" width={80} height={20} />
+            <button onClick={() => setMobileMenu(false)}>
+              <X size={26} />
+            </button>
+          </div>
+
+          <div className="p-4 space-y-3">
+            <Link href="/" className="block py-2">Home</Link>
+
+            {/* MOBILE SERVICES */}
+            <div>
+              <button
+                onClick={() =>
+                  setMobileCategory(
+                    mobileCategory === "Services" ? null : "Services"
+                  )
+                }
+                className="w-full flex justify-between py-2 font-semibold"
+              >
+                Services
+                <ChevronDown size={16} />
+              </button>
+
+              {mobileCategory === "Services" && (
+                <div className="pl-4 space-y-2">
+                  {categories.map((cat) => (
+                    <div key={cat}>
+                      <button
+                        onClick={() =>
+                          setMobileSub(mobileSub === cat ? null : cat)
+                        }
+                        className="w-full flex justify-between py-1 font-medium"
+                      >
+                        {cat}
+                        <ChevronDown size={14} />
+                      </button>
+
+                      {mobileSub === cat && (
+                        <div className="pl-4 space-y-1 text-sm text-gray-600">
+                          {Object.entries(subCategories[cat]).map(
+                            ([_, items]) =>
+                              items.map((item, i) =>
+                                typeof item === "string" ? (
+                                  <div key={i}>{item}</div>
+                                ) : (
+                                  <Link
+                                    key={i}
+                                    href={item.link}
+                                    className="block text-[#FF5100]"
+                                  >
+                                    {item.label}
+                                  </Link>
+                                )
+                              )
+                          )}
+                        </div>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            <Link href="/about" className="block py-2">About Us</Link>
+            <Link href="/contact" className="block py-2">Contact Us</Link>
+            <Link href="/login" className="block py-2">Login</Link>
+          </div>
+        </div>
+      )}
     </header>
   );
 };
