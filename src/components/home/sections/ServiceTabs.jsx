@@ -145,13 +145,13 @@ const ServiceTabs = () => {
             <ul className="mb-6 space-y-2">
               {current.points.map((point, i) => (
                 <li key={i} className="flex items-center gap-2 text-base">
-                  <span className="text-green-400 text-lg">✔</span>
-                  <span className="text-blue-300 font-sm">{point}</span>
+                  <span className="text-lg">✔</span>
+                  <span className=" text-white font-sm">{point}</span>
                 </li>
               ))}
             </ul>
 
-            <button className="self-start bg-green-400 cursor-pointer text-blue-500 px-7 py-2 rounded-full text-base font-semibold transition-all">
+            <button className="self-start bg-green-400 cursor-pointer px-7 py-2 rounded-full text-base font-semibold transition-all">
               Explore more
             </button>
           </motion.div>

@@ -55,16 +55,8 @@ const Hero = () => {
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.3, duration: 1 }}
-          className="relative md:w-[520px]"
+          className="relative md:w-[750px]"
         >
-          {/* <Image
-            src="/Home-Hero.png"
-            alt="Digital Globe"
-            width={520}
-            height={580}
-            className="mx-auto drop-shadow-[0_0_50px_rgba(59,130,246,0.7)]"
-            priority
-          /> */}
           <section class="business-section">
             <div class="platform">
               <div class="ring ring-1"></div>
