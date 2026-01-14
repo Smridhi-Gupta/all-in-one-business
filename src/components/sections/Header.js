@@ -1,9 +1,10 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ChevronDown, Search } from "lucide-react";
+import { usePathname } from "next/navigation";
 
 const categories = [
   "IT",
@@ -78,20 +79,27 @@ const Header = () => {
   const [showServices, setShowServices] = useState(false);
   const [showIndustries, setShowIndustries] = useState(false);
 
+  const pathname = usePathname();
+
+  // ✅ Close menus on route change
+  useEffect(() => {
+    setShowServices(false);
+    setShowIndustries(false);
+  }, [pathname]);
+
   return (
     <header className="w-full bg-white shadow-sm fixed z-50">
-      <div className="max-w-7xl mx-auto flex items-center justify-between px-8">
+      <div className="max-w-7xl mx-auto flex items-center justify-between px-8 h-[72px]">
         {/* LOGO */}
         <Link href="/">
-          <Image src="/Logo.png" alt="Company Logo" width={120} height={14} />
+          <Image src="/Logo.png" alt="Company Logo" width={80} height={20} />
         </Link>
 
-        {/* NAVIGATION */}
+        {/* NAV */}
         <nav className="hidden md:flex items-center gap-8 text-[#031225] font-medium text-[15px]">
-          <Link href="/" className="hover:text-[#FF5100]">
-            Home
-          </Link>
-          {/* ================= SERVICES SIDEBAR + MEGA MENU ================= */}
+          <Link href="/" className="hover:text-[#FF5100]">Home</Link>
+
+          {/* SERVICES */}
           <div className="relative" onMouseEnter={() => setShowServices(true)}>
             <div className="flex items-center gap-1 cursor-pointer">
               <span className="hover:text-[#FF5100]">Services</span>
@@ -101,53 +109,52 @@ const Header = () => {
             {showServices && (
               <div
                 className="
-        fixed left-0 top-[85px] w-screen h-screen
-        bg-white border-t border-gray-200
-        flex z-9999
-      "
+                  fixed left-0 top-[72px]
+                  w-screen h-[60vh]
+                  bg-white border-t border-gray-200
+                  flex z-9999
+                "
                 onMouseLeave={() => setShowServices(false)}
               >
-                {/* ===== LEFT SIDEBAR ===== */}
-                <div className="w-[320px] bg-[#f3f3f3] p-6 space-y-3 overflow-y-auto">
+                {/* LEFT SIDEBAR */}
+                <div className="w-[300px] bg-[#f3f3f3] p-4 space-y-2 overflow-y-auto">
                   {categories.map((item, i) => (
                     <div
                       key={i}
                       onMouseEnter={() => setActiveCategory(item)}
-                      className={`px-4 py-3 rounded-lg cursor-pointer transition text-md font-bold
-              ${
-                activeCategory === item
-                  ? "bg-white font-bold text-[#031225]"
-                  : "hover:bg-white"
-              }`}
+                      className={`px-4 py-2 rounded-md cursor-pointer transition font-bold
+                        ${
+                          activeCategory === item
+                            ? "bg-white text-[#031225]"
+                            : "hover:bg-white"
+                        }`}
                     >
                       {item}
                     </div>
                   ))}
                 </div>
 
-                {/* ===== RIGHT MEGA MENU ===== */}
-                <div className="flex-1 px-20 py-8 grid grid-cols-3 gap-6 overflow-y-auto grid-flow-row-dense">
+                {/* RIGHT CONTENT */}
+                <div className="flex-1 px-12 py-6 grid grid-cols-3 gap-4 overflow-y-auto">
                   {subCategories[activeCategory] &&
                     Object.entries(subCategories[activeCategory]).map(
                       ([heading, items], i) => (
                         <div key={i}>
-                          {/* HEADING */}
                           <Link
-                            href={`/service`}
-                            className="font-bold text-md text-[#031225] mb-4 flex items-center gap-2 hover:text-[#FF5100] transition"
+                            href="/service"
+                            className="font-bold text-md text-[#031225] mb-2 flex items-center gap-2 hover:text-[#FF5100]"
                           >
                             <span className="w-3 h-3 bg-[#FF5100] rounded-full"></span>
                             {heading}
                           </Link>
 
-                          {/* LIST */}
                           {items.length > 0 && (
-                            <ul className="space-y-1">
+                            <ul className="space-y-0.5">
                               {items.map((item, j) => (
                                 <li key={j}>
                                   <Link
                                     href=""
-                                    className="text-[#555] hover:text-[#FF5100] text-sm transition"
+                                    className="text-[#555] hover:text-[#FF5100] text-sm"
                                   >
                                     {item}
                                   </Link>
@@ -162,28 +169,21 @@ const Header = () => {
               </div>
             )}
           </div>
-          {/* ================= INDUSTRIES DROPDOWN (WORKING LIKE SERVICES) ================= */}
+
+          {/* INDUSTRIES */}
           <div
             className="relative"
             onMouseEnter={() => setShowIndustries(true)}
             onMouseLeave={() => setShowIndustries(false)}
           >
-            {/* Trigger */}
             <div className="flex items-center gap-1 cursor-pointer hover:text-[#FF5100]">
               <span>Industries</span>
               <ChevronDown size={15} />
             </div>
 
-            {/* Dropdown */}
             {showIndustries && (
-              <div
-                className="
-        absolute top-[42px] left-0 w-[260px]
-        bg-[#fafafa] shadow-md border border-[#e5e5e5]
-        z-9999
-      "
-              >
-                <ul className="text-[15px] text-[#031225]">
+              <div className="absolute top-[42px] left-0 w-[260px] bg-[#fafafa] shadow-md border z-9999">
+                <ul>
                   {[
                     "Accounting Firm Industry",
                     "Cleaning Industry",
@@ -197,11 +197,7 @@ const Header = () => {
                   ].map((item, i) => (
                     <li
                       key={i}
-                      className="
-              px-5 py-3 border-b border-gray-200
-              hover:bg-gray-100 hover:text-[#FF5100]
-              cursor-pointer transition
-            "
+                      className="px-5 py-3 border-b hover:bg-gray-100 hover:text-[#FF5100]"
                     >
                       {item}
                     </li>
@@ -211,22 +207,16 @@ const Header = () => {
             )}
           </div>
 
-          {/* ABOUT */}
-          <Link href="/about" className="hover:text-[#FF5100]">
-            About Us
-          </Link>
-          {/* CONTACT */}
-          <Link href="/contact" className="hover:text-[#FF5100]">
-            Contact Us
-          </Link>
+          <Link href="/about" className="hover:text-[#FF5100]">About Us</Link>
+          <Link href="/contact" className="hover:text-[#FF5100]">Contact Us</Link>
         </nav>
 
-        {/* RIGHT SIDE */}
+        {/* RIGHT */}
         <div className="flex items-center gap-4">
           <Search size={18} className="cursor-pointer hover:text-[#FF5100]" />
           <Link
             href="/login"
-            className="text-sm px-4 py-1.5 border border-gray-300 rounded-md hover:bg-gray-100"
+            className="text-sm px-4 py-1.5 border rounded-md hover:bg-gray-100"
           >
             Login
           </Link>

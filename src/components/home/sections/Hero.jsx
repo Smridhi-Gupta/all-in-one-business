@@ -1,15 +1,14 @@
 "use client";
 
 import React from "react";
-import Image from "next/image";
 import { motion } from "framer-motion";
 
 const Hero = () => {
   return (
     <section
-      className="relative w-full min-h-screen pt-[180px] flex flex-col items-center text-white 
+      className="relative w-full min-h-screen pt-[150px] flex flex-col items-center text-white 
   bg-[#031225] overflow-hidden pb-12
-  bg-[url('/Home-Hero-bg.png')] bg-cover bg-no-repeat bg-position-[center_140px]"
+  bg-[url('/Home-Hero-bg.png')] bg-cover bg-no-repeat"
     >
       {/* ===== Floating Stats (Slightly Lower) ===== */}
       <div className="absolute top-[37%] left-[16%] bg-white/20 backdrop-blur-md px-4 py-2 rounded-xl text-center">
@@ -35,7 +34,7 @@ const Hero = () => {
         </span>
 
         <h1 className="text-6xl md:text-6xl font-bold mb-3 leading-tight">
-          Embtel Digital <br /> Solutions
+          Embtel Digital Solutions
         </h1>
 
         <p className="text-gray-300 max-w-2xl mb-8 text-sm md:text-base leading-tight font-semibold">
@@ -43,7 +42,7 @@ const Hero = () => {
           Growth Through Innovation and Technology.
         </p>
 
-        <div className="flex flex-wrap gap-4 justify-center mb-8">
+        <div className="flex flex-wrap gap-4 justify-center mb-18">
           <button className="px-7 py-2 bg-[#FF5100] hover:bg-orange-500 rounded-full text-white font-medium shadow-md hover:shadow-orange-400/30 transition-all duration-300 cursor-pointer">
             Let’s contact us
           </button>
@@ -58,14 +57,55 @@ const Hero = () => {
           transition={{ delay: 0.3, duration: 1 }}
           className="relative md:w-[520px]"
         >
-          <Image
+          {/* <Image
             src="/Home-Hero.png"
             alt="Digital Globe"
             width={520}
             height={580}
             className="mx-auto drop-shadow-[0_0_50px_rgba(59,130,246,0.7)]"
             priority
-          />
+          /> */}
+          <section class="business-section">
+            <div class="platform">
+              <div class="ring ring-1"></div>
+              <div class="ring ring-2"></div>
+
+              {/* <!-- Items --> */}
+              <div class="item item-1">
+                <div class="icon">🚗</div>
+                <span>IT</span>
+              </div>
+
+              <div class="item item-2">
+                <div class="icon">📷</div>
+                <span>Immigration</span>
+              </div>
+
+              <div class="item item-3">
+                <div class="icon">🏢</div>
+                <span>Accounting</span>
+              </div>
+
+              <div class="item item-4">
+                <div class="icon">💳</div>
+                <span>Document Evaluation</span>
+              </div>
+
+              <div class="item item-5">
+                <div class="icon">⚙️</div>
+                <span>Judiciary</span>
+              </div>
+
+              <div class="item item-6">
+                <div class="icon">👤</div>
+                <span>Staffing</span>
+              </div>
+              <div class="item item-7">
+                <div class="icon">👤</div>
+                <span>Corporate Training</span>
+              </div>
+            </div>
+          </section>
         </motion.div>
       </motion.div>
     </section>

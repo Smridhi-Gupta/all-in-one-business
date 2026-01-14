@@ -24,12 +24,15 @@ const PlatformIndustrySection = () => {
       </h2>
 
       {/* ===== Explore Buttons Grid ===== */}
-      <div className="flex flex-wrap justify-center gap-6 mb-10 max-w-5xl mx-auto">
+      <div className="flex flex-wrap justify-center gap-6 
+      mb-10 max-w-5xl mx-auto">
         {exploreButtons.map((text, i) => (
           <button
             key={i}
             className="flex items-center gap-2 px-6 py-3 rounded-full border border-[#031225]
             text-[#FF5100]
+
+            
             transition-all duration-300 text-sm font-semibold hover:bg-[#FF5100] hover:text-white"
           >
             <ExternalLink size={14} />

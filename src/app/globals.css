@@ -3,7 +3,6 @@
 @import "slick-carousel/slick/slick.css";
 @import "slick-carousel/slick/slick-theme.css";
 
-
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
@@ -124,7 +123,133 @@
   }
 }
 
+/* Platform */
+.platform {
+  position: relative;
+  width: 700px;
+  max-width: 100%;
+  height: 300px;
+  margin: 0 auto;
+}
 
+/* Rings */
+.ring {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: rgba(7, 45, 117, 0.877);
+  box-shadow: 0 0 40px rgb(7, 45, 117);
+}
+
+.ring-1 {
+  width: 600px;
+  height: 120px;
+  bottom: 40px;
+}
+
+.ring-2 {
+  width: 500px;
+  height: 90px;
+  bottom: 60px;
+  background: rgba(70, 103, 213, 0.255);
+}
+
+/* Items */
+.item {
+  width: 100%;
+  max-width: 70px;
+  position: absolute;
+  text-align: center;
+  font-size: 14px;
+  animation: bounce 5s infinite linear;
+}
+
+.item::after {
+  content: "";
+  display: block;
+  width: 1px;
+  height: 40px;
+  background: rgba(7, 45, 117, 0.877);
+  margin: 8px auto 0;
+}
+
+.icon {
+  width: 42px;
+  height: 42px;
+  background: rgba(31, 209, 209, 0.15);
+  border: 1px solid rgba(7, 45, 117, 0.877);
+  border-radius: 50%;
+  line-height: 42px;
+  font-size: 20px;
+  margin: 0 auto 6px;
+  box-shadow: 0 0 10px rgba(31, 209, 209, 0.6);
+}
+
+/* Positioning */
+.item-1 {
+  left: 3%;
+  bottom: 40%;
+  animation-delay: 1s;
+}
+
+.item-2 {
+  left: 15%;
+  bottom: 53%;
+  animation-delay: 3.5s;
+}
+
+.item-3 {
+  left: 30%;
+  bottom: 58%;
+  animation-delay: 1s;
+}
+
+.item-4 {
+  right: 45%;
+  top: 0;
+  animation-delay: 3.5s;
+}
+
+.item-5 {
+  right: 29%;
+  bottom: 60%;
+  animation-delay: 1s;
+}
+
+.item-6 {
+  right: 16%;
+  bottom: 53%;
+  animation-delay: 3.5s;
+}
+.item-7 {
+  right: 3%;
+  bottom: 40%;
+  animation-delay: 1s;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .platform {
+    height: 360px;
+  }
+
+  .item {
+    bottom: 160px;
+    font-size: 12px;
+  }
+}
+
+@keyframes bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(15px);
+  }
+}
 
 /* #FF5100 Orange */
 /* #031225 Blue */
