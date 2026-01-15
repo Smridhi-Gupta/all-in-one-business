@@ -89,8 +89,16 @@ export default function ServicesOverview() {
 /* CARD COMPONENT */
 function ServiceCard({ icon, title, bullets }) {
   return (
-    <div className="text-left">
-      {/* ICON CIRCLE — EXACT screenshot style */}
+    <div
+      className="
+        text-left bg-white
+        p-6 rounded-xl
+        shadow-lg
+        hover:shadow-[0_18px_45px_rgba(0,0,0,0.12)]
+        transition-all duration-300
+      "
+    >
+      {/* ICON CIRCLE */}
       <div
         className="
           w-20 h-20 rounded-full border border-[#FF5100]
@@ -111,7 +119,7 @@ function ServiceCard({ icon, title, bullets }) {
       <ul className="mt-3 space-y-[2px]">
         {bullets.map((b, i) => (
           <li key={i} className="flex gap-2 items-start">
-            <span className="text-xl">►</span>
+            <span className="text-xl text-[#FF5100]">►</span>
             <div className="text-md">{b}</div>
           </li>
         ))}
@@ -123,6 +131,7 @@ function ServiceCard({ icon, title, bullets }) {
         className="
           inline-block mt-5 bg-[#FF5100] text-white text-[16px] font-semibold
           px-5 py-[12px] rounded-sm transition
+          hover:bg-[#e44900]
         "
       >
         Explore Now
@@ -130,3 +139,4 @@ function ServiceCard({ icon, title, bullets }) {
     </div>
   );
 }
+

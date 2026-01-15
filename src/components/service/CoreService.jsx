@@ -1,16 +1,8 @@
 "use client";
 
+import Link from "next/link";
+
 const services = [
-  {
-    image:
-      "https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=1200&auto=format&fit=crop",
-    title: "Digital Marketing Strategy",
-    points: [
-      "Audience & market research",
-      "Channel selection & budget planning",
-      "Goal setting & KPI tracking",
-    ],
-  },
   {
     image:
       "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=1200&auto=format&fit=crop",
@@ -24,7 +16,7 @@ const services = [
   {
     image:
       "https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=1200&auto=format&fit=crop",
-    title: "Enterprise Digital Marketing",
+    title: "Digital Marketing Strategy Development",
     points: [
       "Omnichannel strategy execution",
       "Advanced analytics & attribution",
@@ -34,7 +26,7 @@ const services = [
   {
     image:
       "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?q=80&w=1200&auto=format&fit=crop",
-    title: "Ecommerce Digital Marketing",
+    title: "Enterprise Digital Marketing",
     points: [
       "Ecommerce SEO & paid ads",
       "Social media & influencer marketing",
@@ -57,18 +49,19 @@ export default function CoreService() {
         </p>
 
         {/* Service Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {services.map((service, i) => (
             <div
               key={i}
               className="
                 bg-white border border-gray-200 rounded-2xl p-2.5 text-left
                 shadow-sm hover:shadow-lg transition-all duration-300
+                flex flex-col
               "
             >
               {/* IMAGE */}
               <div
-                className="w-full h-55 rounded-xl mb-5 bg-cover bg-center"
+                className="w-full h-56 rounded-xl mb-5 bg-cover bg-center"
                 style={{
                   backgroundImage: `url(${service.image})`,
                 }}
@@ -80,19 +73,34 @@ export default function CoreService() {
               </h3>
 
               {/* POINTS */}
-              <ul className="space-y-2">
+              <ul className="space-y-2 flex-grow">
                 {service.points.map((p, idx) => (
                   <li
                     key={idx}
                     className="text-gray-600 text-sm flex items-start gap-2 px-2"
                   >
-                    <span className="text-[#FF5100] text-2xl leading-none">
+                    <span className="text-[#FF5100] text-3xl leading-none">
                       •
                     </span>
                     {p}
                   </li>
                 ))}
               </ul>
+
+              {/* CTA BUTTON */}
+              <div className="px-2 mt-5">
+                <Link
+                  href="/category"
+                  className="
+                    inline-block w-full text-center
+                    bg-[#FF5100] text-white
+                    py-2.5 rounded-lg text-sm font-medium
+                    hover:bg-orange-500 transition
+                  "
+                >
+                  Explore Services
+                </Link>
+              </div>
             </div>
           ))}
         </div>

@@ -4,6 +4,7 @@ import Hero from '@/components/category/Hero'
 import IndustriesSection from '@/components/category/IndustriesSection'
 import ServicesOverview from '@/components/category/ServicesOverview'
 import Testimonial from '@/components/category/Testimonial'
+import PlatformIndustrySection from '@/components/home/sections/PlatformIndustrySection'
 import React from 'react'
 
 const page = () => {
@@ -13,7 +14,7 @@ const page = () => {
         <ServicesOverview />
         <AccomplishmentsSection />
         <IndustriesSection />
-        <Testimonial />
+        <PlatformIndustrySection />
         <FAQSection />
     </div>
   )
