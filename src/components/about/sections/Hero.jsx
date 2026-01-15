@@ -4,9 +4,21 @@ import { ChevronRight } from "lucide-react";
 
 const Hero = () => {
   return (
-    <section className="w-full bg-[#031225] text-white pt-36 pb-20 md:pt-44 md:pb-28 text-center">
-      <div className="max-w-4xl mx-auto px-4">
-        <h1 className="text-4xl md:text-5xl font-bold mb-6">About Us</h1>
+    <section
+      className="relative w-full text-white pt-36 pb-20 md:pt-44 md:pb-28 text-center bg-cover bg-center"
+      style={{
+        backgroundImage:
+          "url('https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1600&auto=format&fit=crop')",
+      }}
+    >
+      {/* DARK OVERLAY */}
+      <div className="absolute inset-0 bg-[#031225]/65"></div>
+
+      {/* CONTENT */}
+      <div className="relative z-10 max-w-4xl mx-auto px-4">
+        <h1 className="text-4xl md:text-5xl font-bold mb-6">
+          About Us
+        </h1>
 
         <p className="text-sm md:text-base leading-relaxed font-normal">
           We take pride in delivering customised solutions that reflect your

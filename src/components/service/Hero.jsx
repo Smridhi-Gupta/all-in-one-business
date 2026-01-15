@@ -18,7 +18,7 @@ export default function Hero() {
       <div className="relative z-10 max-w-7xl w-full grid grid-cols-1 md:grid-cols-2 gap-14 items-center">
         {/* LEFT TEXT CONTENT */}
         <div className="space-y-6">
-          <span className="inline-block text-[13px] tracking-wide uppercase px-3 py-1 rounded-full border border-white/20 text-[#FF5100]">
+          <span className="inline-block text-sm font-medium tracking-wide uppercase px-3 py-1 rounded-full border border-white/50 text-[#FF5100]">
             Result-driven digital marketing agency
           </span>
 

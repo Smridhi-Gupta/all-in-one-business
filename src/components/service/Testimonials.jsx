@@ -38,13 +38,12 @@ export default function Testimonials() {
       }}
     >
       {/* LIGHT / SOFT OVERLAY */}
-      <div className="absolute inset-0 bg-white/80"></div>
+      <div className="absolute inset-0 bg-white/30"></div>
 
       <div className="relative z-10 max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-14 items-center">
-        
         {/* ================= LEFT SIDE ================= */}
         <div>
-          <span className="inline-flex items-center gap-2 text-sm font-semibold text-[#FF5100] tracking-wide mb-3">
+          <span className="inline-flex items-center gap-2 text-sm font-bold text-[#FF5100] tracking-wide mb-3">
             <span className="w-2 h-2 bg-[#FF5100] rounded-full"></span>
             TESTIMONIALS
           </span>
@@ -53,18 +52,16 @@ export default function Testimonials() {
             What Our Clients <br /> Say About Us
           </h2>
 
-          <p className="text-gray-600 text-sm md:text-base mt-4 max-w-md">
-            Real feedback from businesses who trusted us for their digital growth
-            and achieved measurable success.
+          <p className=" text-sm md:text-lg mt-4 max-w-md">
+            Real feedback from businesses who trusted us for their digital
+            growth and achieved measurable success.
           </p>
         </div>
 
         {/* ================= RIGHT SIDE ================= */}
         <div className="relative">
-          
           {/* Testimonial Card */}
           <div className="bg-white rounded-2xl p-10 shadow-[0_0_40px_rgba(0,0,0,0.08)] border border-gray-100 text-left relative">
-            
             <Quote size={32} className="text-[#031225] opacity-60 mb-4" />
 
             <p className="text-lg text-[#031225] font-medium leading-relaxed">
