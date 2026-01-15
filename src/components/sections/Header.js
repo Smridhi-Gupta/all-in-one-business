@@ -97,7 +97,7 @@ const Header = () => {
 
   return (
     <header className="fixed w-full bg-white shadow-sm z-50">
-      <div className="max-w-7xl mx-auto h-[72px] flex items-center justify-between px-6">
+      <div className="max-w-7xl mx-auto h-[74px] flex items-center justify-between px-6">
         {/* LOGO */}
         <Link href="/">
           <Image src="/Logo.png" alt="Logo" width={80} height={20} />

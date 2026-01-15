@@ -123,7 +123,7 @@
   }
 }
 
-/* Platform */
+/* ================= PLATFORM ================= */
 .platform {
   position: relative;
   width: 700px;
@@ -132,19 +132,19 @@
   margin: 0 auto;
 }
 
-/* Rings */
+/* ================= RINGS ================= */
 .ring {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
   border-radius: 50%;
-  background: rgba(7, 45, 117, 0.877);
-  box-shadow: 0 0 40px rgb(7, 45, 117);
+  background: rgba(7, 45, 117, 0.88);
+  box-shadow: 0 0 40px rgba(7, 45, 117, 0.9);
 }
 
 .ring-1 {
   width: 600px;
-  height: 120px;
+  height: 140px;
   bottom: 40px;
 }
 
@@ -152,10 +152,11 @@
   width: 500px;
   height: 90px;
   bottom: 60px;
-  background: rgba(70, 103, 213, 0.255);
+  background: rgba(70, 103, 213, 0.28);
+  box-shadow: 0 0 30px rgba(70, 103, 213, 0.5);
 }
 
-/* Items */
+/* ================= ITEMS ================= */
 .item {
   width: 100%;
   max-width: 70px;
@@ -165,28 +166,57 @@
   animation: bounce 5s infinite linear;
 }
 
+/* Connector line */
 .item::after {
   content: "";
   display: block;
   width: 1px;
   height: 40px;
-  background: rgba(7, 45, 117, 0.877);
+  background: rgba(7, 45, 117, 0.88);
   margin: 8px auto 0;
 }
 
+/* ================= ICON (BLUE THEME FIX) ================= */
 .icon {
   width: 42px;
   height: 42px;
-  background: rgba(31, 209, 209, 0.15);
-  border: 1px solid rgba(7, 45, 117, 0.877);
+  background: rgba(70, 103, 213, 0.18); /* blue glass */
+  border: 1px solid rgba(7, 45, 117, 0.9);
   border-radius: 50%;
-  line-height: 42px;
-  font-size: 20px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 18px;
+  color: #9db6ff; /* soft blue icon */
+
   margin: 0 auto 6px;
-  box-shadow: 0 0 10px rgba(31, 209, 209, 0.6);
+
+  box-shadow:
+    0 0 12px rgba(70, 103, 213, 0.6),
+    inset 0 0 6px rgba(70, 103, 213, 0.4);
+
+  transition: all 0.3s ease;
 }
 
-/* Positioning */
+/* Hover (still blue, no orange) */
+.item:hover .icon {
+  transform: scale(1.1);
+  box-shadow:
+    0 0 20px rgba(70, 103, 213, 0.9),
+    inset 0 0 10px rgba(70, 103, 213, 0.6);
+}
+
+/* Text */
+.item span {
+  display: block;
+  font-size: 12px;
+  color: #e5e7eb;
+  margin-top: 2px;
+}
+
+/* ================= POSITIONING ================= */
 .item-1 {
   left: 3%;
   bottom: 40%;
@@ -206,7 +236,7 @@
 }
 
 .item-4 {
-  right: 45%;
+  left: 45%;
   top: 0;
   animation-delay: 3.5s;
 }
@@ -222,24 +252,29 @@
   bottom: 53%;
   animation-delay: 3.5s;
 }
+
 .item-7 {
   right: 3%;
   bottom: 40%;
   animation-delay: 1s;
 }
 
-/* Responsive */
+/* ================= RESPONSIVE ================= */
 @media (max-width: 600px) {
   .platform {
     height: 360px;
   }
 
   .item {
-    bottom: 160px;
     font-size: 12px;
+  }
+
+  .item::after {
+    height: 30px;
   }
 }
 
+/* ================= ANIMATION ================= */
 @keyframes bounce {
   0%,
   100% {

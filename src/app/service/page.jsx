@@ -4,9 +4,10 @@ import React from 'react'
 import WhatIsDigitalMarketing from '../../components/service/WhatIsDigitalMarketing'
 import CoreService from '../../components/service/CoreService'
 import WhyChooseUs from '../../components/service/WhyChooseUs'
-import Testimonials from '../../components/service/Testimonials'
+// import Testimonials from '../../components/service/Testimonials'
 import CTASection from '../../components/service/CTASection'
 import FAQSection from '@/components/home/sections/FAQSection'
+import PlatformIndustrySection from '@/components/home/sections/PlatformIndustrySection'
 
 const page = () => {
   return (
@@ -16,7 +17,8 @@ const page = () => {
         <WhatIsDigitalMarketing />
         <CoreService />
         <WhyChooseUs />
-        <Testimonials />
+        {/* <Testimonials /> */}
+        <PlatformIndustrySection />
         <CTASection />
         <FAQSection />
         
