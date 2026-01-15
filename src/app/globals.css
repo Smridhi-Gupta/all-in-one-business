@@ -288,3 +288,38 @@
 
 /* #FF5100 Orange */
 /* #031225 Blue */
+
+/* MOBILE FIX FOR ORBIT */
+@media (max-width: 640px) {
+  .platform {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    place-items: center;
+    padding: 20px 16px;
+  }
+
+  .ring {
+    display: none;
+  }
+
+  .item {
+    position: static !important;
+    transform: none !important;
+    text-align: center;
+  }
+
+  .item span {
+    display: block;
+    margin-top: 6px;
+    font-size: 12px;
+  }
+
+  .item .icon {
+    width: 48px;
+    height: 48px;
+    font-size: 20px;
+  }
+}
+

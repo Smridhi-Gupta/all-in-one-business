@@ -34,57 +34,75 @@ export default function FAQSection() {
   };
 
   return (
-    <section className="py-24 bg-white">
-      <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-14 items-start">
-        
+    <section className="py-12 sm:py-16 md:py-20 bg-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 items-start">
         {/* LEFT SIDE — FAQ */}
         <div>
-          <h2 className="text-4xl font-bold text-[#031225] mb-10">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#031225] mb-6 sm:mb-10">
             Frequently Asked Questions
           </h2>
 
-          <div className="space-y-4">
+          <div className="space-y-3 sm:space-y-4">
             {faqs.map((faq, i) => (
-              <div key={i}>
+              <div
+                key={i}
+                className="rounded-md overflow-hidden border border-gray-100"
+              >
                 {/* QUESTION */}
                 <button
                   onClick={() => toggle(i)}
                   className="
                     w-full bg-[#f2f8ff] text-left 
-                    px-6 py-5 rounded-md 
-                    font-semibold text-[16px] 
-                    flex justify-between items-center cursor-pointer
+                    px-4 sm:px-6 py-4 sm:py-5 
+                    font-semibold text-sm sm:text-base
+                    flex justify-between items-center 
+                    transition cursor-pointer
+                    hover:bg-[#eaf3ff]
                   "
                 >
                   {faq.q}
 
                   {openIndex === i ? (
-                    <ChevronUp size={22} className="text-gray-700" />
+                    <ChevronUp
+                      size={20}
+                      className="text-gray-600 flex-shrink-0"
+                    />
                   ) : (
-                    <ChevronDown size={22} className="text-gray-700" />
+                    <ChevronDown
+                      size={20}
+                      className="text-gray-600 flex-shrink-0"
+                    />
                   )}
                 </button>
 
-                {/* ANSWER */}
-                {openIndex === i && (
-                  <div className="px-8 py-5 text-gray-700 text-[15px] leading-relaxed cursor-pointer">
+                {/* ANSWER (animated height) */}
+                <div
+                  className={`
+                    overflow-hidden transition-all duration-300 ease-in-out
+                    ${
+                      openIndex === i
+                        ? "max-h-40 opacity-100"
+                        : "max-h-0 opacity-0"
+                    }
+                  `}
+                >
+                  <div className="px-4 sm:px-6 py-3 sm:py-5 text-gray-700 text-sm sm:text-[15px] leading-relaxed bg-white">
                     {faq.a}
                   </div>
-                )}
+                </div>
               </div>
             ))}
           </div>
         </div>
 
         {/* RIGHT SIDE — IMAGE */}
-        <div className="w-full h-[520px] rounded-2xl overflow-hidden">
+        <div className="w-full h-[260px] sm:h-[360px] md:h-[520px] rounded-2xl overflow-hidden shadow-md">
           <img
             src="https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=1200&auto=format&fit=crop"
             alt="FAQ illustration"
             className="w-full h-full object-cover"
           />
         </div>
-
       </div>
     </section>
   );

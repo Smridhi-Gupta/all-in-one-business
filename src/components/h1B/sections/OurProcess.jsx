@@ -4,15 +4,14 @@ import { motion } from "framer-motion";
 import { CheckCircle } from "lucide-react";
 
 const OurProcess = () => {
-  // Reusable fade-up animation for each step
   const fadeUp = {
-    hidden: { opacity: 0, y: 40 },
+    hidden: { opacity: 0, y: 30 },
     visible: (i) => ({
       opacity: 1,
       y: 0,
       transition: {
-        duration: 0.7,
-        delay: i * 0.15, // each step appears one by one
+        duration: 0.6,
+        delay: i * 0.1,
         ease: "easeOut",
       },
     }),
@@ -51,17 +50,17 @@ const OurProcess = () => {
 
   return (
     <motion.section
-      className="bg-white py-16 px-6 overflow-hidden"
+      className="bg-white py-12 sm:py-16 px-4 sm:px-6 overflow-hidden"
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, amount: 0.3 }} // triggers when 30% of section is visible
+      viewport={{ once: true, amount: 0.2 }}
     >
       <div className="max-w-5xl mx-auto text-center">
         {/* Heading */}
         <motion.h2
           variants={fadeUp}
           custom={0}
-          className="text-3xl md:text-4xl font-bold text-[#021024]"
+          className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#021024]"
         >
           How Our Process Works
         </motion.h2>
@@ -69,27 +68,36 @@ const OurProcess = () => {
         <motion.p
           variants={fadeUp}
           custom={0.2}
-          className="text-gray-600 mt-3 text-lg max-w-3xl mx-auto"
+          className="text-gray-600 mt-3 text-sm sm:text-base md:text-lg max-w-3xl mx-auto"
         >
           We make the H-1B journey efficient and error-free — both for employers
           and employees.
         </motion.p>
 
-        {/* Process Steps */}
-        <div className="mt-12 text-left space-y-8">
+        {/* Steps */}
+        <div className="mt-10 sm:mt-12 space-y-5 sm:space-y-6 text-left">
           {steps.map((step, i) => (
             <motion.div
               key={i}
               variants={fadeUp}
               custom={i + 1}
-              className="flex items-start gap-3 bg-[#F9FAFB] rounded-lg p-5 shadow-sm hover:shadow-md transition-shadow duration-300"
+              className="
+                flex items-start gap-3
+                bg-gray-50
+                rounded-xl
+                p-4 sm:p-5
+                border border-gray-100
+                hover:shadow-md hover:-translate-y-[2px]
+                transition-all duration-300
+              "
             >
-              <CheckCircle className="text-[#FF6B00] w-6 h-6 mt-1 shrink-0" />
+              <CheckCircle className="text-[#FF6B00] w-5 h-5 sm:w-6 sm:h-6 mt-1 shrink-0" />
+
               <div>
-                <h3 className="font-semibold text-[#021024] text-lg">
+                <h3 className="font-semibold text-[#021024] text-base sm:text-lg">
                   {step.title}
                 </h3>
-                <p className="text-gray-600 text-sm md:text-base mt-1">
+                <p className="text-gray-600 text-sm sm:text-base mt-1 leading-relaxed">
                   {step.desc}
                 </p>
               </div>

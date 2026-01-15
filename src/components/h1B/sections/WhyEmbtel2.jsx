@@ -4,109 +4,92 @@ import { motion } from "framer-motion";
 import { CheckCircle } from "lucide-react";
 
 const WhyEmbtel2 = () => {
-  // Smooth fade-up animation variant
   const fadeUp = {
-    hidden: { opacity: 0, y: 60 },
+    hidden: { opacity: 0, y: 30 },
     visible: (i) => ({
       opacity: 1,
       y: 0,
       transition: {
-        duration: 1.1,
-        delay: i * 0.25,
-        ease: [0.25, 0.1, 0.25, 1],
+        duration: 0.6,
+        delay: i * 0.12,
+        ease: "easeOut",
       },
     }),
   };
 
-  // Points data for left/right columns
-  const leftPoints = [
+  const points = [
     {
       title: "Dedicated Corporate Immigration Desk",
-      desc: "— one point of contact for all your filings.",
+      desc: "Single point of contact for all filings and communication.",
     },
     {
       title: "Full Compliance Support",
-      desc: "— LCA filing, prevailing wage verification, and USCIS-ready documentation.",
+      desc: "LCA filing, prevailing wage validation, and USCIS-ready documentation.",
     },
     {
       title: "Fast, Transparent Communication",
-      desc: "— we keep your HR team informed at every step.",
+      desc: "We keep your HR team informed at every stage of the process.",
     },
-  ];
-
-  const rightPoints = [
     {
       title: "Legal Precision + Operational Efficiency",
-      desc: "through partnership with Bay Area Immigration Services.",
+      desc: "Powered by our partnership with Bay Area Immigration Services.",
     },
     {
-      title: "Fast, Transparent Communication",
-      desc: "— Dedicated case manager for each client and live case tracking.",
+      title: "Real-Time Case Tracking",
+      desc: "Dedicated case manager and structured progress updates.",
     },
     {
       title: "Strategic Partnership",
-      desc: "— combining legal expertise with operational excellence.",
+      desc: "Blending legal expertise with strong operational execution.",
     },
   ];
 
   return (
     <motion.section
-      className="bg-white py-16 px-4 sm:px-6 md:px-10 overflow-hidden"
+      className="bg-white py-12 sm:py-16 px-4 sm:px-6 overflow-hidden"
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, amount: 0.3 }}
+      viewport={{ once: true, amount: 0.25 }}
     >
       <div className="max-w-6xl mx-auto text-center">
-        {/* Section Title */}
+        {/* Heading */}
         <motion.h2
           variants={fadeUp}
           custom={0}
-          className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#021024] mb-10 sm:mb-12"
+          className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#021024] mb-10"
         >
           Why Choose Embtel Solutions
         </motion.h2>
 
-        {/* Responsive Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 text-left text-gray-700">
-          {/* Left Column */}
-          <div className="space-y-6 sm:space-y-8">
-            {leftPoints.map((item, i) => (
-              <motion.div
-                key={i}
-                variants={fadeUp}
-                custom={i + 1}
-                className="flex items-start space-x-3 bg-[#F9FAFB] rounded-lg p-4 sm:p-5 shadow-sm hover:shadow-md transition-shadow duration-300"
-              >
-                <CheckCircle className="w-5 h-5 sm:w-6 sm:h-6 text-[#FF6B00] mt-1 shrink-0" />
-                <p className="text-sm sm:text-base leading-relaxed">
-                  <span className="font-semibold text-[#021024]">
-                    {item.title}
-                  </span>{" "}
-                  {item.desc}
-                </p>
-              </motion.div>
-            ))}
-          </div>
+        {/* Cards Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 text-left">
+          {points.map((item, i) => (
+            <motion.div
+              key={i}
+              variants={fadeUp}
+              custom={i + 1}
+              className="
+                bg-[#F9FAFB]
+                border border-gray-100
+                rounded-2xl
+                p-5 sm:p-6
+                flex gap-4
+                hover:-translate-y-1 hover:shadow-lg
+                transition-all duration-300
+              "
+            >
+              <CheckCircle className="w-6 h-6 text-[#FF6B00] mt-1 shrink-0" />
 
-          {/* Right Column */}
-          <div className="space-y-6 sm:space-y-8">
-            {rightPoints.map((item, i) => (
-              <motion.div
-                key={i}
-                variants={fadeUp}
-                custom={i + 4}
-                className="flex items-start space-x-3 bg-[#F9FAFB] rounded-lg p-4 sm:p-5 shadow-sm hover:shadow-md transition-shadow duration-300"
-              >
-                <CheckCircle className="w-5 h-5 sm:w-6 sm:h-6 text-[#FF6B00] mt-1 shrink-0" />
-                <p className="text-sm sm:text-base leading-relaxed">
-                  <span className="font-semibold text-[#021024]">
-                    {item.title}
-                  </span>{" "}
+              <div>
+                <h3 className="font-semibold text-[#021024] text-sm sm:text-base mb-1">
+                  {item.title}
+                </h3>
+                <p className="text-gray-600 text-sm leading-relaxed">
                   {item.desc}
                 </p>
-              </motion.div>
-            ))}
-          </div>
+              </div>
+            </motion.div>
+          ))}
         </div>
       </div>
     </motion.section>

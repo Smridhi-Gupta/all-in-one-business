@@ -4,15 +4,14 @@ import { motion } from "framer-motion";
 import { FileText, BarChart3, Bookmark, Clock } from "lucide-react";
 
 const ComplianceExcellence = () => {
-  // Fade-up animation variant
   const fadeUp = {
-    hidden: { opacity: 0, y: 40 },
+    hidden: { opacity: 0, y: 30 },
     visible: (i) => ({
       opacity: 1,
       y: 0,
       transition: {
-        duration: 0.7,
-        delay: i * 0.15, // stagger effect
+        duration: 0.6,
+        delay: i * 0.12,
         ease: "easeOut",
       },
     }),
@@ -20,36 +19,36 @@ const ComplianceExcellence = () => {
 
   const features = [
     {
-      icon: <FileText className="w-10 h-10 text-[#FF6B00] mb-4" />,
-      title: "Public Access File (PAF) maintenance",
+      icon: <FileText className="w-7 h-7 text-[#FF6B00]" />,
+      title: "Public Access File (PAF) Maintenance",
     },
     {
-      icon: <BarChart3 className="w-10 h-10 text-[#FF6B00] mb-4" />,
-      title: "Wage compliance and work location documentation",
+      icon: <BarChart3 className="w-7 h-7 text-[#FF6B00]" />,
+      title: "Wage Compliance & Work Location Documentation",
     },
     {
-      icon: <Bookmark className="w-10 h-10 text-[#FF6B00] mb-4" />,
-      title: "Accurate SOC codes and job descriptions",
+      icon: <Bookmark className="w-7 h-7 text-[#FF6B00]" />,
+      title: "Accurate SOC Codes & Job Descriptions",
     },
     {
-      icon: <Clock className="w-10 h-10 text-[#FF6B00] mb-4" />,
-      title: "Consistent status tracking for each employee",
+      icon: <Clock className="w-7 h-7 text-[#FF6B00]" />,
+      title: "Consistent Status Tracking for Each Employee",
     },
   ];
 
   return (
     <motion.section
-      className="bg-[#021024] text-white py-16 px-6 overflow-hidden"
+      className="bg-[#021024] text-white py-12 sm:py-16 px-4 sm:px-6 overflow-hidden"
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, amount: 0.3 }} // triggers once when 30% visible
+      viewport={{ once: true, amount: 0.25 }}
     >
       <div className="max-w-6xl mx-auto text-center">
-        {/* Title */}
+        {/* Heading */}
         <motion.h2
           variants={fadeUp}
           custom={0}
-          className="text-3xl md:text-4xl font-bold mb-4"
+          className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3"
         >
           Compliance & Documentation Excellence
         </motion.h2>
@@ -57,47 +56,63 @@ const ComplianceExcellence = () => {
         <motion.p
           variants={fadeUp}
           custom={0.2}
-          className="text-gray-300 text-lg mb-12"
+          className="text-gray-300 text-sm sm:text-base md:text-lg mb-8 sm:mb-12 max-w-3xl mx-auto"
         >
-          H-1B compliance is non-negotiable — every small oversight can lead to
-          heavy penalties or denials.
+          H-1B compliance is non-negotiable — even small oversights can result
+          in costly penalties, delays, or petition denials.
         </motion.p>
 
-        {/* Features Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+        {/* Features */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 mb-10 sm:mb-12">
           {features.map((feature, i) => (
             <motion.div
               key={i}
               variants={fadeUp}
               custom={i + 1}
-              className="flex flex-col items-center text-center p-6 rounded-xl bg-[#021634] shadow-inner hover:shadow-md transition-all duration-300"
+              className="
+                bg-[#071c35]
+                border border-white/5
+                p-6
+                rounded-2xl
+                flex flex-col items-center text-center
+                hover:-translate-y-1 hover:shadow-lg
+                transition-all duration-300
+              "
             >
-              {feature.icon}
-              <h3 className="font-semibold text-base leading-snug">
-                {feature.title.split(" (")[0]}{" "}
-                {feature.title.includes("(") && (
-                  <>
-                    <br />({feature.title.split("(")[1]}
-                  </>
-                )}
+              {/* Icon badge */}
+              <div className="w-14 h-14 bg-[#FFF4EE] rounded-xl flex items-center justify-center mb-4">
+                {feature.icon}
+              </div>
+
+              <h3 className="text-sm sm:text-base font-semibold leading-snug text-gray-100">
+                {feature.title}
               </h3>
             </motion.div>
           ))}
         </div>
 
-        {/* Bottom Highlight Box */}
+        {/* Bottom Callout */}
         <motion.div
           variants={fadeUp}
           custom={features.length + 1}
-          className="bg-[#3A1F1A] border border-[#FF6B00] text-gray-200 py-5 px-8 rounded-xl max-w-4xl mx-auto text-sm md:text-base leading-relaxed"
+          className="
+            bg-[#0c213b]
+            border border-[#FF6B00]
+            px-5 sm:px-8 py-5 sm:py-6
+            rounded-xl
+            max-w-4xl mx-auto
+            text-sm sm:text-base
+            text-gray-200
+            leading-relaxed
+          "
         >
           With{" "}
           <span className="font-semibold text-white">Embtel Solutions</span> and{" "}
           <span className="font-semibold text-white">
             Bay Area Immigration Services
           </span>
-          , you’re not facing the immigration maze alone — you’re supported by
-          an experienced, reliable, and caring team.
+          , you’re not navigating the immigration maze alone — you’re supported
+          by an experienced, reliable, and detail-oriented team.
         </motion.div>
       </div>
     </motion.section>

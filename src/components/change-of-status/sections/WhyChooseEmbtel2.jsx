@@ -1,63 +1,61 @@
 "use client";
 import React from "react";
 import { motion } from "framer-motion";
-import { Users } from "lucide-react"; // or any icon you prefer
+import { Users } from "lucide-react";
 
 const WhyChooseEmbtel2 = () => {
-  // Fade-up variant (for text + sections)
   const fadeUp = {
-    hidden: { opacity: 0, y: 50 },
+    hidden: { opacity: 0, y: 40 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.8, ease: "easeOut" },
+      transition: { duration: 0.7, ease: "easeOut" },
     },
   };
 
-  // Card animation (staggered)
   const cardVariants = {
-    hidden: { opacity: 0, y: 40 },
+    hidden: { opacity: 0, y: 30 },
     visible: (i) => ({
       opacity: 1,
       y: 0,
       transition: {
         duration: 0.6,
         ease: "easeOut",
-        delay: i * 0.1 + 0.3,
+        delay: i * 0.1 + 0.2,
       },
     }),
   };
 
   return (
     <motion.section
-      className="bg-[#021024] text-white py-16 px-6 overflow-hidden"
+      className="bg-[#021024] text-white py-12 sm:py-16 md:py-20 px-4 sm:px-6 overflow-hidden"
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, amount: 0.3 }} // triggers once when 30% is visible
+      viewport={{ once: true, amount: 0.25 }}
       variants={fadeUp}
     >
       <div className="max-w-6xl mx-auto text-center">
-        {/* Section Header */}
+        {/* Header */}
         <motion.div variants={fadeUp}>
-          <h2 className="text-3xl md:text-4xl font-bold">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold">
             Why Choose Embtel + BAIS
           </h2>
-          <p className="text-gray-300 mt-3 text-lg max-w-3xl mx-auto">
+          <p className="text-gray-300 mt-3 text-sm sm:text-base md:text-lg max-w-3xl mx-auto">
             Changing your visa status involves multiple forms, timelines, and
             evidence — and one small mistake can lead to rejection or loss of
-            status. Thats where our team steps in.
+            status. That’s where our team steps in.
           </p>
         </motion.div>
 
-        {/* Card Layout */}
+        {/* Cards */}
         <motion.div
-          className="mt-12 flex flex-col items-center space-y-8"
+          className="mt-10 sm:mt-12 space-y-8"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.4 }}
         >
-          {/* Top Row (3 Cards) */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 justify-items-center w-full">
+          {/* Top Row */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
             {[
               {
                 title: "Personalized Guidance",
@@ -76,17 +74,19 @@ const WhyChooseEmbtel2 = () => {
                 key={i}
                 custom={i}
                 variants={cardVariants}
-                className="bg-white text-gray-900 rounded-2xl shadow-md p-6 w-full max-w-sm flex flex-col items-center text-center hover:shadow-lg transition-all duration-300"
+                className="bg-white text-gray-900 rounded-2xl shadow-sm p-5 sm:p-6 flex flex-col items-center text-center hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
               >
-                <Users className="text-[#601313] w-10 h-10 mb-4" />
-                <h3 className="font-semibold text-lg mb-2">{card.title}</h3>
+                <Users className="text-[#601313] w-8 h-8 sm:w-10 sm:h-10 mb-3 sm:mb-4" />
+                <h3 className="font-semibold text-base sm:text-lg mb-2">
+                  {card.title}
+                </h3>
                 <p className="text-gray-600 text-sm">{card.desc}</p>
               </motion.div>
             ))}
           </div>
 
-          {/* Bottom Row (2 Cards Centered) */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 justify-items-center mt-4">
+          {/* Bottom Row */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-4xl mx-auto">
             {[
               {
                 title: "Regular Updates",
@@ -101,10 +101,12 @@ const WhyChooseEmbtel2 = () => {
                 key={i}
                 custom={i + 3}
                 variants={cardVariants}
-                className="bg-white text-gray-900 rounded-2xl shadow-md p-6 w-full max-w-sm flex flex-col items-center text-center hover:shadow-lg transition-all duration-300"
+                className="bg-white text-gray-900 rounded-2xl shadow-sm p-5 sm:p-6 flex flex-col items-center text-center hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
               >
-                <Users className="text-[#601313] w-10 h-10 mb-4" />
-                <h3 className="font-semibold text-lg mb-2">{card.title}</h3>
+                <Users className="text-[#601313] w-8 h-8 sm:w-10 sm:h-10 mb-3 sm:mb-4" />
+                <h3 className="font-semibold text-base sm:text-lg mb-2">
+                  {card.title}
+                </h3>
                 <p className="text-gray-600 text-sm">{card.desc}</p>
               </motion.div>
             ))}
@@ -114,8 +116,8 @@ const WhyChooseEmbtel2 = () => {
         {/* Bottom Note */}
         <motion.div
           variants={fadeUp}
-          transition={{ delay: 0.6 }}
-          className="bg-[#3C1F17] border border-[#FF6B00] rounded-lg px-6 py-4 mt-12 max-w-4xl mx-auto text-sm md:text-base text-gray-100"
+          transition={{ delay: 0.5 }}
+          className="bg-[#3C1F17] border border-[#FF6B00] rounded-lg px-4 sm:px-6 py-4 mt-10 sm:mt-12 max-w-4xl mx-auto text-xs sm:text-sm md:text-base text-gray-100"
         >
           <p>
             With <span className="font-semibold">Embtel Solutions</span> and{" "}

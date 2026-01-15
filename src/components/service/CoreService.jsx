@@ -37,19 +37,20 @@ const services = [
 
 export default function CoreService() {
   return (
-    <section className="w-full py-14 px-6 bg-white">
+    <section className="w-full py-12 sm:py-14 px-4 sm:px-6 bg-white">
       <div className="max-w-7xl mx-auto text-center">
         {/* Heading */}
-        <h2 className="text-3xl md:text-5xl font-extrabold text-[#031225] mb-3">
+        <h2 className="text-2xl sm:text-3xl md:text-5xl font-extrabold text-[#031225] mb-3">
           Core Digital Marketing Services
         </h2>
-        <p className="text-gray-500 text-md max-w-xl mx-auto mb-12">
+
+        <p className="text-gray-500 text-sm sm:text-md max-w-xl mx-auto mb-10 sm:mb-12">
           Comprehensive solutions tailored to your business needs and growth
           objectives
         </p>
 
         {/* Service Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
           {services.map((service, i) => (
             <div
               key={i}
@@ -61,14 +62,14 @@ export default function CoreService() {
             >
               {/* IMAGE */}
               <div
-                className="w-full h-56 rounded-xl mb-5 bg-cover bg-center"
+                className="w-full h-48 sm:h-52 lg:h-56 rounded-xl mb-5 bg-cover bg-center"
                 style={{
                   backgroundImage: `url(${service.image})`,
                 }}
               ></div>
 
               {/* HEADING */}
-              <h3 className="font-bold text-[#031225] mb-4 text-lg px-2">
+              <h3 className="font-bold text-[#031225] mb-4 text-base sm:text-lg px-2">
                 {service.title}
               </h3>
 
@@ -77,9 +78,9 @@ export default function CoreService() {
                 {service.points.map((p, idx) => (
                   <li
                     key={idx}
-                    className="text-gray-600 text-sm flex items-start gap-2 px-2"
+                    className="text-gray-600 text-xs sm:text-sm flex items-start gap-2 px-2"
                   >
-                    <span className="text-[#FF5100] text-3xl leading-none">
+                    <span className="text-[#FF5100] text-2xl leading-none">
                       •
                     </span>
                     {p}

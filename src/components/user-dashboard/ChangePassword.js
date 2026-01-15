@@ -2,13 +2,13 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import Sidebar from "@/components/Sidebar";
+import Sidebar from "./Sidebar";
 import { BASE_URL_USER, CHANGE_PASSWORD } from "@/API";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useForm } from "react-hook-form";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
-import Loader from "@/components/Loader";
+import Loader from "./Loader";
 
 export default function ChangePassword() {
   const {

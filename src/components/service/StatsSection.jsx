@@ -22,12 +22,12 @@ const stats = [
 
 export default function StatsSection() {
   return (
-    <section className="w-full flex justify-center px-6 relative z-30 -mt-24">
+    <section className="w-full flex justify-center px-4 sm:px-6 relative z-30 -mt-12 sm:-mt-20 lg:-mt-24">
       <div
         className="
           max-w-6xl w-full 
           grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3
-          gap-8
+          gap-5 sm:gap-6 lg:gap-8
         "
       >
         {stats.map((item, i) => (
@@ -43,7 +43,7 @@ export default function StatsSection() {
             {/* ICON BOX */}
             <div
               className="
-                w-14 h-14 rounded-xl 
+                w-12 h-12 sm:w-14 sm:h-14 rounded-xl 
                 bg-[#FFE8DE] 
                 flex items-center justify-center
                 mb-4
@@ -53,14 +53,12 @@ export default function StatsSection() {
             </div>
 
             {/* NUMBER */}
-            <h3 className="text-3xl font-bold text-[#031225] mb-1">
+            <h3 className="text-2xl sm:text-3xl font-bold text-[#031225] mb-1">
               {item.value}
             </h3>
 
             {/* LABEL */}
-            <p className="text-gray-500 text-sm md:text-base">
-              {item.label}
-            </p>
+            <p className="text-gray-500 text-sm sm:text-base">{item.label}</p>
           </div>
         ))}
       </div>

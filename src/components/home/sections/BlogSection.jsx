@@ -32,9 +32,9 @@ const blogs = [
 
 const BlogSection = () => {
   return (
-    <section className="relative w-full bg-white py-20 overflow-hidden">
+    <section className="relative w-full bg-white py-14 sm:py-20 overflow-hidden">
       {/* ===== Background Pattern ===== */}
-      <div className="absolute inset-0 -z-10 opacity-80">
+      <div className="absolute inset-0 -z-10 opacity-60">
         <Image
           src="/blog.jpg"
           alt="blog background"
@@ -44,39 +44,40 @@ const BlogSection = () => {
         />
       </div>
 
-      <div className="max-w-7xl mx-auto px-6 text-center relative z-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 text-center relative z-10">
         {/* ===== Badge ===== */}
         <div className="flex justify-center mb-4">
-          <div className="flex items-center gap-2 bg-[#fff] text-[#031225] border border-gray-200 px-4 py-1 rounded-full text-sm font-medium shadow-sm">
+          <div className="flex items-center gap-2 bg-white text-[#031225] border border-gray-200 px-4 py-1 rounded-full text-xs sm:text-sm font-medium shadow-sm">
             <span className="w-2 h-2 bg-[#FF5100] rounded-full"></span> Blog
           </div>
         </div>
 
         {/* ===== Heading ===== */}
-        <h2 className="text-2xl md:text-3xl font-bold text-[#031225] mb-14">
+        <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-[#031225] mb-10 sm:mb-14">
           Find Your Answers Here
         </h2>
 
         {/* ===== Blog Cards ===== */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 place-items-center">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-10 place-items-center">
           {blogs.map((blog) => (
             <motion.div
               key={blog.id}
-              whileHover={{ y: -8 }}
+              whileHover={{ y: -6 }}
               transition={{ duration: 0.3 }}
               className="bg-[#031225] text-white rounded-2xl overflow-hidden shadow-lg max-w-sm w-full"
             >
-              {/* Blog Image */}
-              <div className="relative w-full h-48">
+              {/* Image */}
+              <div className="relative w-full h-40 sm:h-44 md:h-48">
                 <Image
                   src={blog.image}
                   alt={blog.title}
                   fill
-                  className="object-cover rounded-t-2xl"
+                  className="object-cover"
                 />
+
                 {/* Date Badge */}
-                <div className="absolute bottom-[-18px] left-6 bg-[#FF5100] text-white text-center rounded-full w-[55px] h-[55px] flex flex-col items-center justify-center shadow-md">
-                  <span className="text-lg font-bold leading-none">
+                <div className="absolute bottom-[-16px] left-5 bg-[#FF5100] text-white text-center rounded-full w-[52px] h-[52px] flex flex-col items-center justify-center shadow-md">
+                  <span className="text-base font-bold leading-none">
                     {blog.date}
                   </span>
                   <span className="text-[10px] uppercase font-medium">
@@ -85,12 +86,13 @@ const BlogSection = () => {
                 </div>
               </div>
 
-              {/* Blog Content */}
-              <div className="pt-8 pb-6 px-6 text-left">
-                <h3 className="text-base font-semibold mb-4 leading-snug">
+              {/* Content */}
+              <div className="pt-8 pb-6 px-5 sm:px-6 text-left">
+                <h3 className="text-sm sm:text-base font-semibold mb-4 leading-snug">
                   {blog.title}
                 </h3>
-                <button className="flex items-center gap-2 text-sm font-medium text-white/80 hover:text-[#FF5100] transition-colors">
+
+                <button className="flex items-center gap-2 text-xs sm:text-sm font-medium text-white/80 hover:text-[#FF5100] transition-colors">
                   Read more <ArrowRight size={16} />
                 </button>
               </div>
