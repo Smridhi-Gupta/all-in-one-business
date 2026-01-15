@@ -3,12 +3,7 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import {
-  ChevronDown,
-  Search,
-  Menu,
-  X,
-} from "lucide-react";
+import { ChevronDown, Search, Menu, X } from "lucide-react";
 import { usePathname } from "next/navigation";
 
 /* ================= DATA ================= */
@@ -32,8 +27,6 @@ const subCategories = {
     "Web Design & Development": [
       "Custom Website Design",
       "WordPress Web Design",
-      "eCommerce Web Design",
-      "WordPress",
       "Full Stack Websites",
       "Hosting & Domain",
       "Security",
@@ -57,7 +50,6 @@ const subCategories = {
       "Lead Generation Services",
     ],
     "DA & AI": ["CRM", "Web Scrapping", "Chatbot"],
-    "Graphic Design": [],
   },
 
   Immigration: {
@@ -134,9 +126,7 @@ const Header = () => {
                       key={cat}
                       onMouseEnter={() => setActiveCategory(cat)}
                       className={`px-4 py-2 rounded-md font-bold cursor-pointer ${
-                        activeCategory === cat
-                          ? "bg-white"
-                          : "hover:bg-white"
+                        activeCategory === cat ? "bg-white" : "hover:bg-white"
                       }`}
                     >
                       {cat}
@@ -151,13 +141,13 @@ const Header = () => {
                       <div key={heading}>
                         <Link
                           href="/service"
-                          className="font-bold mb-2 flex gap-2 hover:text-[#FF5100]"
+                          className="font-bold mb-2 flex items-center gap-2 hover:text-[#FF5100]"
                         >
-                          <span className="w-3 h-3 bg-[#FF5100] rounded-full" />
-                          {heading}
+                          <span className="w-3 h-3 bg-[#FF5100] rounded-full shrink-0" />
+                          <span>{heading}</span>
                         </Link>
 
-                        <ul className="space-y-0.5">
+                        <ul className="space-y-2">
                           {items.map((item, i) =>
                             typeof item === "string" ? (
                               <li key={i} className="text-sm text-gray-600">
@@ -190,15 +180,15 @@ const Header = () => {
         {/* RIGHT */}
         <div className="flex items-center gap-4">
           <Search size={18} />
-          <Link href="/login" className="hidden md:block border px-4 py-1.5 rounded-md">
+          <Link
+            href="/login"
+            className="hidden md:block border px-4 py-1.5 rounded-md"
+          >
             Login
           </Link>
 
           {/* MOBILE BURGER */}
-          <button
-            className="md:hidden"
-            onClick={() => setMobileMenu(true)}
-          >
+          <button className="md:hidden" onClick={() => setMobileMenu(true)}>
             <Menu size={26} />
           </button>
         </div>
@@ -215,7 +205,9 @@ const Header = () => {
           </div>
 
           <div className="p-4 space-y-3">
-            <Link href="/" className="block py-2">Home</Link>
+            <Link href="/" className="block py-2">
+              Home
+            </Link>
 
             {/* MOBILE SERVICES */}
             <div>
@@ -271,9 +263,15 @@ const Header = () => {
               )}
             </div>
 
-            <Link href="/about" className="block py-2">About Us</Link>
-            <Link href="/contact" className="block py-2">Contact Us</Link>
-            <Link href="/login" className="block py-2">Login</Link>
+            <Link href="/about" className="block py-2">
+              About Us
+            </Link>
+            <Link href="/contact" className="block py-2">
+              Contact Us
+            </Link>
+            <Link href="/login" className="block py-2">
+              Login
+            </Link>
           </div>
         </div>
       )}

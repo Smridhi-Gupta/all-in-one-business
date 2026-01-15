@@ -33,7 +33,7 @@ const StatsSection = () => {
         {stats.map((item, i) => (
           <div key={i} className="flex flex-col items-center justify-center">
             {/* Icon Background */}
-            <div className="w-18 h-22 rounded-full bg-white shadow-lg flex items-center justify-center mb-4">
+            <div className="w-18 h-18 rounded-full bg-white shadow-lg flex items-center justify-center mb-4">
               <span className="text-[#031225]">{item.icon}</span>
             </div>
 
