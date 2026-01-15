@@ -27,10 +27,8 @@ export default function WhyChooseUs() {
   return (
     <section className="w-full bg-[#031225] text-white py-20 px-6">
       <div className="max-w-7xl mx-auto">
-
         {/* ===== TOP SECTION ===== */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mb-14">
-
           {/* TEXT BLOCK */}
           <div>
             <span className="inline-flex items-center gap-2 text-sm text-[#FF5100] tracking-wide font-semibold">
@@ -73,26 +71,23 @@ export default function WhyChooseUs() {
                 hover:scale-[1.03] transition-all duration-300
               "
             >
-              <p className="text-[#FF5100] text-md font-bold mb-3">
+              <p className="text-[#FF5100] text-3xl font-bold mb-3">
                 {c.number}
               </p>
 
               <h3 className="font-bold text-lg mb-2">{c.title}</h3>
 
-              <p className="text-gray-300 text-md leading-relaxed">
-                {c.desc}
-              </p>
+              <p className="text-gray-300 text-md leading-relaxed">{c.desc}</p>
             </div>
           ))}
         </div>
 
         {/* ===== BOTTOM DESCRIPTION ===== */}
-        <p className="text-gray-300 text-md max-w-4xl leading-relaxed">
+        <p className="text-gray-300 text-md leading-relaxed text-center">
           We collaborate with innovative companies across various industries,
           ranging from 20 to 1,000 seats, who highly value technology and
           prioritize strong security measures.
         </p>
-
       </div>
     </section>
   );

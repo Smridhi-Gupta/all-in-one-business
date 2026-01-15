@@ -20,10 +20,11 @@ const categories = [
 const subCategories = {
   IT: {
     "Digital Marketing": [
-      "Franchise Digital Marketing",
-      "Digital Marketing Strategy Development",
-      "Enterprise Digital Marketing",
+      { label: "Franchise Digital Marketing", link: "/category" },
+      { label: "Digital Marketing Strategy Development", link: "/category" },
+      { label: "Enterprise Digital Marketing", link: "/category" },
     ],
+
     "Web Design & Development": [
       "Custom Website Design",
       "WordPress Web Design",
@@ -31,11 +32,13 @@ const subCategories = {
       "Hosting & Domain",
       "Security",
     ],
+
     "Social Media": [
       "Social Media Management",
       "Franchise Social Media",
       "Enterprise Social Media",
     ],
+
     SEO: [
       "Local SEO",
       "Technical SEO",
@@ -44,11 +47,13 @@ const subCategories = {
       "Enterprise SEO",
       "SEO Audit",
     ],
+
     PPC: [
       "Search Engine Marketing",
       "Google Ads Management",
       "Lead Generation Services",
     ],
+
     "DA & AI": ["CRM", "Web Scrapping", "Chatbot"],
   },
 
