@@ -1,6 +1,7 @@
 "use client";
 
 import { Calendar } from "lucide-react";
+import Link from "next/link";
 
 export default function CTASection() {
   return (
@@ -26,18 +27,20 @@ export default function CTASection() {
       </p>
 
       {/* Button */}
-      <button
-        className="
-          bg-white text-[#031225] 
-          px-6 py-3 rounded-lg 
-          font-bold text-md flex items-center gap-2 mx-auto
-          hover:bg-gray-100 transition-all
-          shadow-lg
-        "
-      >
-        <Calendar size={16} />
-        Schedule a Call
-      </button>
+      <Link href="/contact">
+        <button
+          className="
+      bg-white text-[#031225] 
+      px-6 py-3 rounded-lg 
+      font-bold text-md flex items-center gap-2 mx-auto
+      hover:bg-gray-100 transition-all
+      shadow-lg cursor-pointer
+    "
+        >
+          <Calendar size={16} />
+          Schedule a Call
+        </button>
+      </Link>
 
       {/* Bottom Note */}
       <p className="text-gray-300 text-sm mt-4">

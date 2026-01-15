@@ -43,19 +43,20 @@ export default function WhyChooseUs() {
             </h2>
           </div>
 
-          {/* GREY IMAGE PLACEHOLDER */}
+          {/* IMAGE */}
           <div className="flex justify-center md:justify-end">
             <div
               className="
                 w-[500px] h-[270px]
-                bg-gray-300
                 rounded-2xl
                 shadow-lg
-                flex items-center justify-center
+                bg-cover bg-center
               "
-            >
-              
-            </div>
+              style={{
+                backgroundImage:
+                  "url('https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1200&auto=format&fit=crop')",
+              }}
+            />
           </div>
         </div>
 
@@ -72,15 +73,12 @@ export default function WhyChooseUs() {
                 hover:scale-[1.03] transition-all duration-300
               "
             >
-              {/* Number */}
               <p className="text-[#FF5100] text-md font-bold mb-3">
                 {c.number}
               </p>
 
-              {/* Title */}
               <h3 className="font-bold text-lg mb-2">{c.title}</h3>
 
-              {/* Description */}
               <p className="text-gray-300 text-md leading-relaxed">
                 {c.desc}
               </p>
